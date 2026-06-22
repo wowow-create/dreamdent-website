@@ -1,0 +1,8 @@
+name = "dreamdent-website"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+assets = { directory = "dist/client" }
+
+[vars]
+NODE_ENV = "production"
