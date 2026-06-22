@@ -1,0 +1,244 @@
+---
+import type { Lang } from '../utils/i18n';
+import { t, localePath } from '../utils/i18n';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  subtitle?: string;
+  stats?: { value: string; label: string; labelEn?: string }[];
+}
+
+const { lang, title, subtitle, stats } = Astro.props;
+const tr = t(lang);
+
+const defaultTitle = lang === 'bg'
+  ? 'Център по имплантология и <em>естетична стоматология</em>'
+  : 'Center of Implantology and <em>Aesthetic Dentistry</em>';
+
+const defaultSubtitle = lang === 'bg'
+  ? 'Ние сме екип от единомислещи хора, отдадени на работата си в името на пациента. Вашата усмивка е нашият приоритет.'
+  : 'We are a team of like-minded people dedicated to our work on behalf of the patient. Your smile is our priority.';
+
+const defaultStats = [
+  { value: '20+', label: 'години опит', labelEn: 'years of experience' },
+  { value: '2000+', label: 'импланти', labelEn: 'implants placed' },
+  { value: '5000+', label: 'доволни пациенти', labelEn: 'satisfied patients' },
+  { value: '4.9★', label: 'средна оценка', labelEn: 'average rating' },
+];
+---
+
+<section class="hero" aria-label={lang === 'bg' ? 'Начален банер' : 'Hero banner'}>
+  <!-- Background -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-gradient"></div>
+    <div class="hero-pattern"></div>
+  </div>
+
+  <div class="container hero-content">
+    <div class="hero-text" data-animate="fade-up">
+      <span class="section-label">
+        {lang === 'bg' ? 'Плевен, България' : 'Pleven, Bulgaria'}
+      </span>
+      <h1 set:html={title ?? defaultTitle} />
+      <p class="hero-subtitle">{subtitle ?? defaultSubtitle}</p>
+      <div class="hero-actions">
+        <a href={localePath(lang, lang === 'bg' ? '/контакти' : '/en/contact')} class="btn btn-primary">
+          {tr.hero.cta}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={localePath(lang, lang === 'bg' ? '/услуги/имплантология' : '/en/services/implantology')} class="btn btn-outline">
+          {tr.hero.learnMore}
+        </a>
+      </div>
+    </div>
+
+    <!-- Floating badge -->
+    <div class="hero-badge" data-animate="fade-left" data-delay="300" aria-hidden="true">
+      <div class="hero-badge-inner">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" stroke="none"/></svg>
+        <div>
+          <strong>{lang === 'bg' ? 'Д-р Галя Пенкова' : 'Dr. Galya Penkova'}</strong>
+          <span>{lang === 'bg' ? 'Сертифициран имплантолог от 2006' : 'Certified implantologist since 2006'}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="hero-stats" data-animate="fade-up" data-delay="200">
+    <div class="container">
+      <ul class="stats-list">
+        {(stats ?? defaultStats).map((s) => (
+          <li class="stat-item">
+            <span class="stat-value">{s.value}</span>
+            <span class="stat-label">{lang === 'bg' ? s.label : (s.labelEn ?? s.label)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 72px;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-dark);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 50%, rgba(200,169,110,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 85% 20%, rgba(200,169,110,0.08) 0%, transparent 50%),
+    linear-gradient(160deg, #1A1208 0%, #2C2015 50%, #1A1208 100%);
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(200,169,110,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(4rem, 10vw, 8rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Hero Text */
+.hero-text .section-label { color: var(--color-gold-light); }
+
+.hero-text h1 {
+  color: var(--color-cream);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-block: 1rem 1.5rem;
+  max-width: 700px;
+}
+
+.hero-text h1 :global(em) {
+  font-style: italic;
+  color: var(--color-gold);
+}
+
+.hero-subtitle {
+  color: rgba(250, 247, 242, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Floating Badge */
+.hero-badge {
+  background: rgba(250, 247, 242, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  max-width: 260px;
+  flex-shrink: 0;
+}
+
+.hero-badge-inner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  color: var(--color-cream);
+}
+
+.hero-badge-inner svg { color: var(--color-gold); flex-shrink: 0; margin-top: 2px; }
+
+.hero-badge-inner strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  margin-bottom: 0.25rem;
+}
+
+.hero-badge-inner span {
+  font-size: 0.78rem;
+  color: rgba(250, 247, 242, 0.65);
+  line-height: 1.4;
+}
+
+/* Stats */
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  background: rgba(250, 247, 242, 0.05);
+  border-top: 1px solid rgba(200, 169, 110, 0.2);
+  padding-block: 1.5rem;
+}
+
+.stats-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.55);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-badge { display: none; }
+}
+
+@media (max-width: 640px) {
+  .stats-list { justify-content: center; gap: 1.5rem 2rem; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { text-align: center; justify-content: center; }
+}
+</style>

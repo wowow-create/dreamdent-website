@@ -1,0 +1,88 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Клинични случаи — Преди и след — DreamDent"
+  description="Клинични случаи от практиката на DreamDent. Реални резултати от имплантология, естетична стоматология и лицева естетика."
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <span class="section-label">Резултати</span>
+      <h1>Клинични случаи</h1>
+      <p class="hero-sub">Реални резултати от нашата практика</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" data-animate="fade-up">
+        <button class="filter-btn active" data-filter="all">Всички</button>
+        <button class="filter-btn" data-filter="implantology">Имплантология</button>
+        <button class="filter-btn" data-filter="aesthetic">Естетична стоматология</button>
+        <button class="filter-btn" data-filter="facial">Лицева естетика</button>
+        <button class="filter-btn" data-filter="aligners">Алайнери</button>
+      </div>
+
+      <!-- Cases will be loaded from Keystatic content -->
+      <div class="cases-empty" data-animate="fade-up">
+        <div class="empty-icon">📸</div>
+        <h3>Снимките се добавят от admin панела</h3>
+        <p>
+          В admin панела (<code>/keystatic</code>) можете да добавяте клинични случаи с фотографии „преди" и „след".
+          Те ще се показват автоматично на тази страница.
+        </p>
+        <a href="/keystatic" class="btn btn-outline" style="margin-top: 1.5rem;">
+          Отиди в Admin панела
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero { background: var(--color-dark); padding: clamp(6rem, 12vw, 10rem) 0 clamp(3rem, 6vw, 5rem); }
+.page-hero h1 { color: var(--color-cream); margin-top: 0.5rem; }
+.hero-sub { color: rgba(250,247,242,0.6); font-size: 1.1rem; margin-top: 0.5rem; }
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-white);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-dark);
+}
+
+.cases-empty {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--color-cream-dark);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--color-border);
+}
+
+.empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+.cases-empty h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.cases-empty p { color: var(--color-text-muted); max-width: 480px; margin-inline: auto; line-height: 1.7; }
+.cases-empty code { background: var(--color-white); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9em; color: var(--color-gold-dark); }
+</style>

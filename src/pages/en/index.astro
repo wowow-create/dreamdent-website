@@ -1,0 +1,257 @@
+---
+export const prerender = false;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import TestimonialCard from '../../components/TestimonialCard.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+const lang = 'en';
+const services = [
+  {
+    title: 'Implantology',
+    description: 'Implants — the modern alternative to missing teeth. CBCT 3D diagnostics. Hundreds of successful operations annually.',
+    icon: '🦷',
+    href: '/en/services/implantology',
+  },
+  {
+    title: 'Aesthetic Dentistry',
+    description: 'Crowns, veneers, bonding, whitening. Individual approach for each patient. Perfect aesthetics and function.',
+    icon: '✨',
+    href: '/en/services/aesthetic-dentistry',
+  },
+  {
+    title: 'Periodontology',
+    description: 'Gum treatment, tartar removal, treatment of gingivitis and periodontitis.',
+    icon: '🩺',
+    href: '/en/services/periodontology',
+  },
+  {
+    title: 'Facial Aesthetics',
+    description: 'Hyaluronic fillers, botox, plasmolifting. Physical and mental health are inextricably linked.',
+    icon: '💆',
+    href: '/en/services/facial-aesthetics',
+  },
+  {
+    title: 'Aligners',
+    description: 'Clear dental aligners for teeth correction. Aesthetic and comfortable orthodontic treatment.',
+    icon: '😁',
+    href: '/en/services/aligners',
+  },
+  {
+    title: 'Dental Tourism',
+    description: 'Living abroad? Combine treatment with a holiday in Bulgaria. We assist with transfer and accommodation.',
+    icon: '✈️',
+    href: '/en/dental-tourism',
+  },
+];
+
+const testimonials = [
+  {
+    text: 'On behalf of my mother Silvia Ivanova, I would like to thank Dr. Penkova and her team for their exceptional attitude and professionalism. I sincerely recommend their services.',
+    author: 'Ivanova Family',
+  },
+  {
+    text: 'I want to express my sincere gratitude to you, Dr. Penkova and your team! Thank you very much for the beautiful smile that made me so happy. I wish you many more professional successes!',
+    author: 'Patient',
+  },
+  {
+    text: 'Many thanks to Dr. Penkova for her attention and great professional skills! I restored a tooth I thought I would lose. Dr. Penkova placed a perfect implant — now this tooth feels like my own!',
+    author: 'Todorova M.',
+  },
+];
+---
+
+<BaseLayout
+  title="DreamDent — Implantology and Aesthetic Dentistry in Pleven, Bulgaria"
+  description="DreamDent — Center of implantology and aesthetic dentistry in Pleven, Bulgaria. Dr. Galya Penkova. Implants, aesthetic dentistry, aligners, facial aesthetics."
+  lang={lang}
+>
+  <Hero lang={lang} />
+
+  <section class="section services-section">
+    <div class="container">
+      <header class="section-header text-center" data-animate="fade-up">
+        <span class="section-label">Our Services</span>
+        <h2 class="section-title">Comprehensive dental care with a <em>focus on aesthetics</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle">
+          The center provides the highest quality dental services, combining modern technology with an individual approach to each patient.
+        </p>
+      </header>
+      <div class="grid-3" style="margin-top: 3rem;">
+        {services.map((s, i) => (
+          <ServiceCard {...s} delay={i * 100} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-section section-dark">
+    <div class="container about-grid">
+      <div class="about-image-col" data-animate="fade-right">
+        <div class="about-image-frame">
+          <div class="about-image-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>Dr. Penkova's photo</p>
+          </div>
+          <div class="about-cert-badge">
+            <strong>2006</strong>
+            <span>Certified implantologist</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text-col" data-animate="fade-left" data-delay="100">
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">Dr. Galya Penkova — <em>Founder of DreamDent</em></h2>
+        <div class="gold-divider left"></div>
+        <p class="about-text">
+          Dr. Galya Penkova graduated from the Medical University of Sofia, Faculty of Dental Medicine, in 2000. Certified implantologist since 2006, with specializations in Nuremberg, Munich, and Genoa.
+        </p>
+        <p class="about-text">
+          At the DreamDent Implantology Center, hundreds of implantological operations are performed annually, restoring speaking and chewing function while achieving perfect aesthetics.
+        </p>
+        <ul class="about-highlights">
+          {[
+            'Specialization at IFZI Mauthale Nuremberg, Germany',
+            'International Implant Foundation, Munich',
+            'Universitá degli Studi di Genova, Italy (2015)',
+            'TeethXpress — immediate loading protocols',
+          ].map((item) => (
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a href="/en/team" class="btn btn-outline" style="margin-top: 1rem;">Meet Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials-section section-dark">
+    <div class="container">
+      <header class="section-header text-center" data-animate="fade-up">
+        <span class="section-label">Reviews</span>
+        <h2 class="section-title">What our <em>patients say</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle" style="color: rgba(250,247,242,0.65);">Over 158 reviews with a 4.9 / 5 rating</p>
+      </header>
+      <div class="grid-3" style="margin-top: 3rem;">
+        {testimonials.map((t, i) => (
+          <TestimonialCard {...t} delay={i * 150} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tourism-banner">
+    <div class="container tourism-inner">
+      <div data-animate="fade-right">
+        <span class="section-label">Dental Tourism</span>
+        <h2 class="section-title" style="color: var(--color-cream);">
+          Living abroad? <em>Come to us</em>
+        </h2>
+        <p style="color: rgba(250,247,242,0.7); max-width: 480px; line-height: 1.75; margin-bottom: 2rem;">
+          If you live in Greece, Germany, France, Italy or elsewhere — we will assist you in carrying out your implant treatment as soon as possible. Combine the useful with the pleasant — a holiday in Bulgaria and solving your dental problems.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <a href="/en/dental-tourism" class="btn btn-primary">Learn More</a>
+          <a href="/en/contact" class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
+      <div class="tourism-steps" data-animate="fade-left" data-delay="200">
+        {[
+          { step: '01', title: 'Book an Appointment', desc: 'Send a panoramic X-ray by email for an initial consultation' },
+          { step: '02', title: 'Arrive', desc: 'If necessary, we provide transfer and accommodation' },
+          { step: '03', title: 'Treatment', desc: 'CBCT analysis, implant placement, temporary teeth for normal daily life' },
+          { step: '04', title: 'Complete', desc: 'Permanent teeth are fixed. Patients have no food restrictions' },
+        ].map((item) => (
+          <div class="tourism-step">
+            <span class="tourism-step-num">{item.step}</span>
+            <div>
+              <strong>{item.title}</strong>
+              <p>{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+      <div data-animate="fade-right">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">Book an <em>appointment</em></h2>
+        <div class="gold-divider left"></div>
+        <p class="section-subtitle">Contact us for a consultation or inquiry. We will respond within the working day.</p>
+        <div class="contact-info-list" style="margin-top: 2rem;">
+          {[
+            { icon: '📍', label: 'Address', value: 'Pleven, Blvd "Ruse" 17, floor 1, office 2' },
+            { icon: '📞', label: 'Phone', value: '0887 513 752', href: 'tel:+359887513752' },
+            { icon: '📧', label: 'Email', value: 'info@dreamdent.eu', href: 'mailto:info@dreamdent.eu' },
+          ].map((item) => (
+            <div class="contact-info-item">
+              <div class="contact-info-icon">{item.icon}</div>
+              <div>
+                <strong>{item.label}</strong>
+                {item.href
+                  ? <a href={item.href}>{item.value}</a>
+                  : <span>{item.value}</span>
+                }
+              </div>
+            </div>
+          ))}
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🕐</div>
+            <div>
+              <strong>Working Hours</strong>
+              <span>Mon, Thu: 12:30 – 18:30</span>
+              <span>Tue, Wed, Fri: 8:30 – 13:30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-animate="fade-left" data-delay="100">
+        <ContactForm lang={lang} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.services-section { background: var(--color-cream); }
+.section-header { max-width: 700px; margin-inline: auto; }
+.about-section { background: var(--color-dark-mid); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: center; }
+.about-image-frame { position: relative; aspect-ratio: 3/4; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(200,169,110,0.25); }
+.about-image-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; height: 100%; background: rgba(200,169,110,0.05); color: rgba(250,247,242,0.3); font-size: 0.85rem; }
+.about-cert-badge { position: absolute; bottom: 1.5rem; right: -1rem; background: var(--color-gold); color: var(--color-dark); border-radius: var(--radius-md); padding: 1rem 1.25rem; display: flex; flex-direction: column; align-items: center; box-shadow: var(--shadow-lg); }
+.about-cert-badge strong { font-family: var(--font-serif); font-size: 1.75rem; line-height: 1; }
+.about-cert-badge span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-align: center; }
+.about-text { color: rgba(250,247,242,0.72); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+.about-highlights { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 1.5rem; }
+.about-highlights li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: rgba(250,247,242,0.8); }
+.about-highlights li svg { color: var(--color-gold); flex-shrink: 0; }
+.testimonials-section { background: var(--color-dark); }
+.tourism-banner { background: linear-gradient(135deg, #1A1208 0%, #2C2015 50%, #1A1208 100%); padding-block: var(--section-py); }
+.tourism-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+.tourism-steps { display: flex; flex-direction: column; gap: 1.5rem; }
+.tourism-step { display: flex; gap: 1.25rem; align-items: flex-start; }
+.tourism-step-num { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 600; color: var(--color-gold); opacity: 0.5; flex-shrink: 0; line-height: 1; }
+.tourism-step strong { display: block; font-size: 0.95rem; font-weight: 600; color: var(--color-cream); margin-bottom: 0.25rem; }
+.tourism-step p { font-size: 0.85rem; color: rgba(250,247,242,0.6); line-height: 1.6; }
+.contact-section { background: var(--color-cream); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+.contact-info-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.contact-info-item { display: flex; gap: 1rem; align-items: flex-start; }
+.contact-info-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+.contact-info-item strong { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 0.25rem; }
+.contact-info-item span, .contact-info-item a { display: block; font-size: 0.9rem; color: var(--color-dark); }
+.contact-info-item a:hover { color: var(--color-gold); }
+@media (max-width: 900px) {
+  .about-grid, .tourism-inner, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-image-col { display: none; }
+}
+</style>

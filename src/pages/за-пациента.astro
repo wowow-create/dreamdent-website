@@ -1,0 +1,77 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="За пациента — DreamDent"
+  description="Полезна информация за пациентите на DreamDent. Подготовка за имплантиране, следоперативни грижи, FAQ."
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <span class="section-label">Информация</span>
+      <h1>За пациента</h1>
+      <p class="hero-sub">Всичко, което трябва да знаете</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container content-narrow">
+      <div data-animate="fade-up">
+        <h2>Подготовка за имплантиране</h2>
+        <p>Преди поставяне на имплант е необходима задълбочена диагностика, включваща CBCT (3D рентгенова снимка) и цялостен преглед на устната кухина. Важно е да информирате д-р Пенкова за всички медикаменти, които приемате, и съпътстващи заболявания.</p>
+
+        <h2>По-добрата алтернатива на протезите</h2>
+        <p>Зъбните импланти са трайно решение за липсващи зъби — те изглеждат, чувстват се и функционират като естествени зъби. За разлика от снемаемите протези, имплантите не се движат и не причиняват дискомфорт при хранене.</p>
+
+        <h2>Работим с Здравна каса</h2>
+        <p>DreamDent работи с Националната здравноосигурителна каса (НЗОК). Свържете се с нас за информация относно покритите услуги.</p>
+
+        <h2>Материали и апаратура</h2>
+        <p>Работим с продукти на водещи фирми: Zhermack, KerrHawe, 3M ESPE, GC Septodont. Всички материали отговарят на европейските стандарти за качество и безопасност.</p>
+
+        <h2>Честа въпроси (FAQ)</h2>
+        <div class="faq-list">
+          {[
+            {
+              q: 'Болезнено ли е поставянето на имплант?',
+              a: 'Процедурата се извършва под местна упойка. Пациентите обикновено съобщават за минимален дискомфорт по-малък отколкото при изваждане на зъб.',
+            },
+            {
+              q: 'Колко дълго трае лечението?',
+              a: 'Общата продължителност зависи от индивидуалния случай. Зарастването на импланта отнема 3–6 месеца, след което се поставят постоянните зъби.',
+            },
+            {
+              q: 'Колко трайни са имплантите?',
+              a: 'При правилна хигиена и редовни прегледи имплантите могат да издържат цял живот.',
+            },
+            {
+              q: 'Имам ли нужда от препоръка за имплант?',
+              a: 'Не е необходима препоръка. Запишете директно час при нас за преглед и консултация.',
+            },
+          ].map((item) => (
+            <details class="faq-item">
+              <summary class="faq-q">{item.q}</summary>
+              <p class="faq-a">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}
+.content-narrow{max-width:800px}
+.content-narrow h2{font-size:1.5rem;margin:2.5rem 0 0.75rem;color:var(--color-dark)}
+.content-narrow p{color:var(--color-text-muted);line-height:1.8;margin-bottom:1rem}
+.faq-list{display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem}
+.faq-item{background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden}
+.faq-q{padding:1rem 1.25rem;font-size:0.95rem;font-weight:600;color:var(--color-dark);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;transition:var(--transition)}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'＋';color:var(--color-gold);font-size:1.1rem;flex-shrink:0}
+.faq-item[open] .faq-q::after{content:'－'}
+.faq-q:hover{background:var(--color-cream)}
+.faq-a{padding:0.75rem 1.25rem 1.25rem;font-size:0.9rem;color:var(--color-text-muted);line-height:1.75;margin:0;border-top:1px solid var(--color-border)}
+</style>

@@ -1,0 +1,78 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  try {
+    const posts = await getCollection('posts');
+    return posts.map((post) => ({ params: { slug: post.id } }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+let post = null;
+try {
+  post = await getEntry('posts', slug!);
+} catch {
+  // not found
+}
+
+if (!post) {
+  return Astro.redirect('/новини');
+}
+
+const { Content } = await post.render();
+---
+
+<BaseLayout
+  title={`${post.data.title} — DreamDent`}
+  description={post.data.excerpt ?? ''}
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <div class="breadcrumb">
+        <a href="/">Начало</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="/новини">Новини</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>{post.data.title}</span>
+      </div>
+      <time class="post-date" datetime={String(post.data.date)}>
+          {new Date(post.data.date as Date).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </time>
+      <h1>{post.data.title}</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container post-layout">
+      <article class="post-content prose" data-animate="fade-up">
+        <Content />
+      </article>
+      <aside>
+        <div class="back-link-wrap">
+          <a href="/новини" class="btn btn-outline">← Обратно към Новини</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem;font-size:clamp(1.8rem,4vw,3rem)}
+.post-date{font-size:0.8rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-gold);display:block;margin-bottom:0.75rem}
+.post-layout{display:grid;grid-template-columns:1fr 200px;gap:4rem;align-items:start}
+.prose{max-width:760px}
+.prose :global(h2){font-size:1.5rem;margin:2rem 0 0.75rem;color:var(--color-dark)}
+.prose :global(h3){font-size:1.2rem;margin:1.5rem 0 0.5rem}
+.prose :global(p){color:var(--color-text-muted);line-height:1.8;margin-bottom:1rem}
+.prose :global(ul),.prose :global(ol){padding-left:1.5rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:0.5rem}
+.prose :global(li){color:var(--color-text-muted);line-height:1.7}
+.prose :global(strong){color:var(--color-dark)}
+.prose :global(img){border-radius:var(--radius-md);margin-block:1.5rem;width:100%}
+.back-link-wrap{position:sticky;top:88px}
+@media(max-width:768px){.post-layout{grid-template-columns:1fr}}
+</style>

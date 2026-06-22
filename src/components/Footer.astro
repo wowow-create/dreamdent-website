@@ -1,0 +1,281 @@
+---
+import type { Lang } from '../utils/i18n';
+import { t, localePath, servicesSlugs } from '../utils/i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const tr = t(lang);
+const services = servicesSlugs[lang];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <!-- Top Bar -->
+  <div class="footer-top section-dark">
+    <div class="container footer-top-inner">
+      <div>
+        <p class="footer-top-label">{lang === 'bg' ? 'Запишете час' : 'Book Appointment'}</p>
+        <p class="footer-top-title">
+          {lang === 'bg'
+            ? 'Готови да започнете пътя към перфектната усмивка?'
+            : 'Ready to start your journey to a perfect smile?'}
+        </p>
+      </div>
+      <a href={localePath(lang, lang === 'bg' ? '/контакти' : '/en/contact')} class="btn btn-primary">
+        {lang === 'bg' ? 'Свържете се с нас' : 'Get in Touch'}
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Footer -->
+  <div class="footer-main">
+    <div class="container footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href={localePath(lang, '/')} class="footer-logo">
+          <span>Dream</span><span class="gold">Dent</span>
+        </a>
+        <p class="footer-tagline">{tr.footer.tagline}</p>
+        <div class="footer-contact-quick">
+          <a href="tel:+359887513752" class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"></path></svg>
+            0887 513 752
+          </a>
+          <a href="mailto:info@dreamdent.eu" class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            info@dreamdent.eu
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{tr.nav.services}</h4>
+        <ul class="footer-links">
+          <li><a href={services.implantology}>{tr.nav.implantology}</a></li>
+          <li><a href={services.aesthetic}>{tr.nav.aesthetic}</a></li>
+          <li><a href={services.periodontology}>{tr.nav.periodontology}</a></li>
+          <li><a href={services.facial}>{tr.nav.facial}</a></li>
+          <li><a href={services.aligners}>{tr.nav.aligners}</a></li>
+        </ul>
+      </div>
+
+      <!-- Pages -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{lang === 'bg' ? 'Информация' : 'Information'}</h4>
+        <ul class="footer-links">
+          <li><a href={localePath(lang, lang === 'bg' ? '/за-пациента' : '/en/for-patients')}>{tr.nav.patient}</a></li>
+          <li><a href={localePath(lang, lang === 'bg' ? '/дентален-туризъм' : '/en/dental-tourism')}>{tr.nav.tourism}</a></li>
+          <li><a href={localePath(lang, lang === 'bg' ? '/клинични-случаи' : '/en/clinical-cases')}>{tr.nav.cases}</a></li>
+          <li><a href={localePath(lang, lang === 'bg' ? '/екип' : '/en/team')}>{tr.nav.team}</a></li>
+          <li><a href={localePath(lang, lang === 'bg' ? '/новини' : '/en/news')}>{tr.nav.news}</a></li>
+        </ul>
+      </div>
+
+      <!-- Hours -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">{tr.contact.hours}</h4>
+        <ul class="footer-hours">
+          <li>
+            <span>{tr.working_hours.monday}</span>
+            <span>12:30 – 18:30</span>
+          </li>
+          <li>
+            <span>{tr.working_hours.tuesday}</span>
+            <span>8:30 – 13:30</span>
+          </li>
+          <li>
+            <span>{tr.working_hours.wednesday}</span>
+            <span>8:30 – 13:30</span>
+          </li>
+          <li>
+            <span>{tr.working_hours.thursday}</span>
+            <span>12:30 – 18:30</span>
+          </li>
+          <li>
+            <span>{tr.working_hours.friday}</span>
+            <span>8:30 – 13:30</span>
+          </li>
+          <li class="closed">
+            <span>{tr.working_hours.saturday} – {tr.working_hours.sunday}</span>
+            <span>{tr.working_hours.closed}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© {year} DreamDent. {tr.footer.rights}.</p>
+      <a href={lang === 'bg' ? '/en/' : '/'} class="lang-footer">
+        {lang === 'bg' ? 'English' : 'Български'}
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+.site-footer { background: var(--color-cream-dark); }
+
+/* Top CTA */
+.footer-top { padding-block: 2.5rem; }
+
+.footer-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-top-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.25rem;
+}
+
+.footer-top-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--color-cream);
+  font-weight: 400;
+}
+
+/* Main Footer */
+.footer-main {
+  padding-block: 4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+}
+
+/* Brand */
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.footer-logo .gold { color: var(--color-gold); font-weight: 300; }
+
+.footer-tagline {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  max-width: 220px;
+}
+
+.footer-contact-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition: var(--transition);
+}
+
+.footer-contact-item:hover { color: var(--color-gold); }
+
+.footer-contact-item svg { flex-shrink: 0; color: var(--color-gold); }
+
+/* Columns */
+.footer-col-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-links a {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition: var(--transition);
+}
+
+.footer-links a:hover { color: var(--color-gold); padding-left: 4px; }
+
+/* Hours */
+.footer-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.footer-hours li.closed { color: var(--color-text-muted); opacity: 0.6; }
+.footer-hours li span:last-child { font-weight: 500; color: var(--color-dark); }
+.footer-hours li.closed span:last-child { color: var(--color-text-muted); }
+
+/* Bottom */
+.footer-bottom { padding-block: 1.25rem; }
+
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.lang-footer {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.lang-footer:hover { border-color: var(--color-gold); color: var(--color-gold); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-top-inner { flex-direction: column; text-align: center; }
+  .footer-bottom-inner { flex-direction: column; text-align: center; }
+}
+</style>

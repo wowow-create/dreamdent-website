@@ -1,0 +1,53 @@
+---
+export const prerender = false;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+const lang = 'en';
+---
+<BaseLayout title="Contact — DreamDent Pleven, Bulgaria" description="Contact DreamDent. Address: Pleven, Blvd Ruse 17. Tel: +359 887 513 752. info@dreamdent.eu">
+  <div class="page-hero"><div class="container" data-animate="fade-up">
+    <span class="section-label">Get in Touch</span><h1>Contact Us</h1>
+    <p class="hero-sub">Book an appointment or ask a question</p>
+  </div></div>
+  <section class="section"><div class="container contact-layout">
+    <div class="contact-info-col" data-animate="fade-right">
+      <h2>Find Us</h2>
+      <div class="info-cards">
+        {[
+          { icon:'📍', label:'Address', val:'Pleven, Blvd "Ruse" 17, floor 1, office 2, Bulgaria' },
+          { icon:'📞', label:'Phone', val:'+359 887 513 752', href:'tel:+359887513752' },
+          { icon:'📧', label:'Email', val:'info@dreamdent.eu', href:'mailto:info@dreamdent.eu' },
+        ].map((i) => (
+          <div class="info-card">
+            <div class="info-card-icon">{i.icon}</div>
+            <div>
+              <h4>{i.label}</h4>
+              {i.href ? <a href={i.href}>{i.val}</a> : <p>{i.val}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <h2 style="margin-top:2.5rem">Working Hours</h2>
+      <table class="hours-table"><tbody>
+        {[
+          {day:'Monday',h:'12:30 – 18:30'},{day:'Tuesday',h:'8:30 – 13:30'},
+          {day:'Wednesday',h:'8:30 – 13:30'},{day:'Thursday',h:'12:30 – 18:30'},
+          {day:'Friday',h:'8:30 – 13:30'},{day:'Saturday',h:'Closed',c:true},{day:'Sunday',h:'Closed',c:true},
+        ].map((r) => <tr class:list={[{closed:r.c}]}><td>{r.day}</td><td>{r.h}</td></tr>)}
+      </tbody></table>
+    </div>
+    <div class="contact-form-col" data-animate="fade-left" data-delay="100">
+      <h2>Send a Message</h2>
+      <p class="form-intro">Fill out the form and we will get back to you within the working day.</p>
+      <ContactForm lang={lang} />
+    </div>
+  </div></section>
+</BaseLayout>
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}
+.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
+.contact-info-col h2{font-size:1.5rem;margin-bottom:1.25rem}.info-cards{display:flex;flex-direction:column;gap:1.25rem}.info-card{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md)}.info-card-icon{font-size:1.5rem;flex-shrink:0}.info-card h4{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:0.25rem}.info-card p,.info-card a{font-size:0.95rem;color:var(--color-dark)}.info-card a:hover{color:var(--color-gold)}
+.hours-table{width:100%;border-collapse:collapse}.hours-table td{padding:0.65rem 0;font-size:0.9rem;border-bottom:1px dashed var(--color-border);color:var(--color-text-muted)}.hours-table td:last-child{text-align:right;font-weight:600;color:var(--color-dark)}.hours-table tr.closed td{opacity:0.5}
+.contact-form-col h2{font-size:1.5rem;margin-bottom:0.5rem}.form-intro{color:var(--color-text-muted);margin-bottom:1.5rem;font-size:0.95rem}
+@media(max-width:900px){.contact-layout{grid-template-columns:1fr;gap:3rem}}
+</style>

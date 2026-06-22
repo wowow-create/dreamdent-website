@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+const lang = 'bg';
+---
+<BaseLayout title="Естетична стоматология — DreamDent Плевен" description="Естетична стоматология в Плевен. Коронки, фасети, бондинг, избелване. Индивидуален подход за всеки пациент.">
+  <div class="page-hero"><div class="container" data-animate="fade-up">
+    <div class="breadcrumb"><a href="/">Начало</a><span class="breadcrumb-sep">/</span><span>Естетична стоматология</span></div>
+    <span class="section-label">Услуги</span>
+    <h1>Естетична стоматология</h1>
+    <p class="hero-sub">Перфектна усмивка с индивидуален подход</p>
+  </div></div>
+  <section class="section"><div class="container content-grid">
+    <article class="content-body" data-animate="fade-up">
+      <h2>Индивидуален подход</h2>
+      <p>Строго индивидуално е и клиницистът преценява кой е най-добрият вариант за съответния зъб. Когато зъбите са силно разрушени, имат големи или няколко пломби, които заемат по-голямата част от зъба, възстановяването на естетиката и дъвкателната функция се извършва със зъбни коронки.</p>
+      <h2>Нашите услуги</h2>
+      <ul class="service-list">
+        <li><strong>Зъбни коронки</strong> — Металокерамичните коронки са здрави и издръжливи на износване. Предлагаме и изцяло керамични коронки за максимална естетика.</li>
+        <li><strong>Фасети</strong> — Тънки керамични или композитни обвивки, залепени върху предната повърхност на зъбите. Коригират цвят, форма и размер.</li>
+        <li><strong>Бондинг</strong> — Директно нанасяне на композитна смола за поправяне на чипнали, счупени или неправилно оцветени зъби.</li>
+        <li><strong>Избелване</strong> — Професионално избелване на зъбите за по-ярка и привлекателна усмивка.</li>
+        <li><strong>Мостове</strong> — Фиксирана протеза за заместване на липсващи зъби чрез опора на съседните зъби.</li>
+      </ul>
+      <div class="info-box">
+        <h3>✨ Smile Design</h3>
+        <p>При нас се прилага холистичен подход — преди всяка естетична процедура се анализират формата на лицето, цвета на кожата и очаквания резултат, за да се постигне перфектна хармония на усмивката.</p>
+      </div>
+    </article>
+    <aside class="content-sidebar">
+      <div class="sidebar-card" data-animate="fade-left"><h3>Запишете час</h3><p>Консултация за естетична стоматология.</p><ContactForm lang={lang} /></div>
+    </aside>
+  </div></section>
+</BaseLayout>
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}.content-grid{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}.content-body h2{font-size:1.5rem;margin:2rem 0 0.75rem;color:var(--color-dark)}.content-body p{color:var(--color-text-muted);line-height:1.8;margin-bottom:1rem}.service-list{padding-left:1.5rem;display:flex;flex-direction:column;gap:1rem;margin-block:1rem}.service-list li{color:var(--color-text-muted);line-height:1.7}.service-list strong{color:var(--color-dark)}.info-box{background:var(--color-cream-dark);border-left:3px solid var(--color-gold);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:1.5rem;margin-top:2rem}.info-box h3{font-size:1.1rem;margin-bottom:0.5rem}.info-box p{margin:0;font-size:0.9rem}.sidebar-card{background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1.75rem}.sidebar-card h3{font-size:1.25rem;margin-bottom:0.5rem}.sidebar-card p{font-size:0.875rem;color:var(--color-text-muted);margin-bottom:1.25rem}
+@media(max-width:900px){.content-grid{grid-template-columns:1fr}}
+</style>

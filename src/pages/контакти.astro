@@ -1,0 +1,113 @@
+---
+export const prerender = false;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+const lang = 'bg';
+---
+
+<BaseLayout
+  title="Контакти — DreamDent Плевен"
+  description="Свържете се с DreamDent. Адрес: Плевен, бул. Русе 17. Тел: 0887 513 752. info@dreamdent.eu"
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <span class="section-label">Свържете се с нас</span>
+      <h1>Контакти</h1>
+      <p class="hero-sub">Запишете час или задайте въпрос</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container contact-layout">
+      <!-- Info Column -->
+      <div class="contact-info-col" data-animate="fade-right">
+        <h2>Намерете ни</h2>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <div>
+              <h4>Адрес</h4>
+              <p>гр. Плевен, бул. „Русе" №17, ет. 1, каб. 2</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📞</div>
+            <div>
+              <h4>Телефон</h4>
+              <a href="tel:+359887513752">0887 513 752</a>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📧</div>
+            <div>
+              <h4>Имейл</h4>
+              <a href="mailto:info@dreamdent.eu">info@dreamdent.eu</a>
+            </div>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 2.5rem;">Работно време</h2>
+        <table class="hours-table">
+          <tbody>
+            {[
+              { day: 'Понеделник', hours: '12:30 – 18:30' },
+              { day: 'Вторник',   hours: '8:30 – 13:30' },
+              { day: 'Сряда',     hours: '8:30 – 13:30' },
+              { day: 'Четвъртък', hours: '12:30 – 18:30' },
+              { day: 'Петък',     hours: '8:30 – 13:30' },
+              { day: 'Събота',    hours: 'Почивен ден', closed: true },
+              { day: 'Неделя',    hours: 'Почивен ден', closed: true },
+            ].map((r) => (
+              <tr class:list={[{ closed: r.closed }]}>
+                <td>{r.day}</td>
+                <td>{r.hours}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <!-- Map placeholder -->
+        <div class="map-placeholder" data-animate="fade-up" data-delay="200">
+          <p>📍 гр. Плевен, бул. „Русе" №17</p>
+          <a
+            href="https://maps.google.com/?q=Плевен+бул+Русе+17"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline"
+            style="margin-top: 1rem;"
+          >
+            Отвори в Google Maps
+          </a>
+        </div>
+      </div>
+
+      <!-- Form Column -->
+      <div class="contact-form-col" data-animate="fade-left" data-delay="100">
+        <h2>Изпратете съобщение</h2>
+        <p class="form-intro">Попълнете формата и ще се свържем с Вас в рамките на работния ден.</p>
+        <ContactForm lang={lang} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}
+.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
+.contact-info-col h2{font-size:1.5rem;margin-bottom:1.25rem}
+.info-cards{display:flex;flex-direction:column;gap:1.25rem}
+.info-card{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem;background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+.info-card-icon{font-size:1.5rem;flex-shrink:0}
+.info-card h4{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:0.25rem}
+.info-card p,.info-card a{font-size:0.95rem;color:var(--color-dark)}
+.info-card a:hover{color:var(--color-gold)}
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table td{padding:0.65rem 0;font-size:0.9rem;border-bottom:1px dashed var(--color-border);color:var(--color-text-muted)}
+.hours-table td:last-child{text-align:right;font-weight:600;color:var(--color-dark)}
+.hours-table tr.closed td{opacity:0.5}
+.map-placeholder{margin-top:2.5rem;background:var(--color-cream-dark);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2rem;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.map-placeholder p{font-weight:500;color:var(--color-text-muted)}
+.contact-form-col h2{font-size:1.5rem;margin-bottom:0.5rem}
+.form-intro{color:var(--color-text-muted);margin-bottom:1.5rem;font-size:0.95rem}
+@media(max-width:900px){.contact-layout{grid-template-columns:1fr;gap:3rem}}
+</style>

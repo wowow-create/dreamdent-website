@@ -1,0 +1,427 @@
+---
+export const prerender = false;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const lang = 'bg';
+const services = [
+  {
+    title: 'Имплантология',
+    description: 'Импланти — съвременната алтернатива на липсващите зъби. CBCT 3D диагностика. Стотици успешни операции годишно.',
+    icon: '🦷',
+    href: '/услуги/имплантология',
+  },
+  {
+    title: 'Естетична стоматология',
+    description: 'Коронки, фасети, бондинг, избелване. Индивидуален подход за всеки пациент. Перфектна естетика и функция.',
+    icon: '✨',
+    href: '/услуги/естетична-стоматология',
+  },
+  {
+    title: 'Пародонтология',
+    description: 'Лечение на венци, отстраняване на зъбен камък, лечение на гингивит и пародонтит.',
+    icon: '🩺',
+    href: '/услуги/пародонтология',
+  },
+  {
+    title: 'Лицева естетика',
+    description: 'Хиалуронови филъри, ботокс, плазмолифтинг. Физическото и психическото здраве са неразривно свързани.',
+    icon: '💆',
+    href: '/услуги/лицева-естетика',
+  },
+  {
+    title: 'Алайнери',
+    description: 'Прозрачни зъбни шини за коригиране на зъбната редица. Естетично и удобно ортодонтско лечение.',
+    icon: '😁',
+    href: '/услуги/алайнери',
+  },
+  {
+    title: 'Дентален туризъм',
+    description: 'Живеете в чужбина? Комбинирайте лечение с почивка в България. Съдействаме с трансфер и настаняване.',
+    icon: '✈️',
+    href: '/дентален-туризъм',
+  },
+];
+
+const testimonials = [
+  {
+    text: 'Искам да благодаря от името на моята майка Силвия Иванова на Доктор Пенкова и нейния екип за изключителното отношение и професионализъм. Искрено препоръчвам техните услуги.',
+    author: 'Семейство Иванови',
+  },
+  {
+    text: 'Изказвам своята искрена благодарност към Вас д-р Пенкова и Вашият екип! Сърдечно благодаря за красивата усмивка, с която ме направихте щастлива. Пожелавам Ви още много професионални успехи!',
+    author: 'Пациентка',
+  },
+  {
+    text: 'Много благодаря на Д-р Пенкова за вниманието и големите професионални умения! Възстанових един зъб, който мислех, че няма да го имам. Д-р Пенкова постави перфектно имплант — сега този зъб го чувствам като мой!',
+    author: 'Тодорова М.',
+  },
+];
+---
+
+<BaseLayout title="DreamDent — Имплантология и естетична стоматология в Плевен" lang={lang}>
+  <!-- Hero -->
+  <Hero lang={lang} />
+
+  <!-- Services Section -->
+  <section class="section services-section">
+    <div class="container">
+      <header class="section-header text-center" data-animate="fade-up">
+        <span class="section-label">Нашите услуги</span>
+        <h2 class="section-title">Комплексна дентална помощ с <em>фокус върху естетиката</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle">
+          Центърът предоставя най-високо качество дентални услуги, съчетаващи модерни технологии с индивидуален подход към всеки пациент.
+        </p>
+      </header>
+      <div class="grid-3" style="margin-top: 3rem;">
+        {services.map((s, i) => (
+          <ServiceCard {...s} delay={i * 100} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Dr. Penkova Section -->
+  <section class="section about-section section-dark">
+    <div class="container about-grid">
+      <div class="about-image-col" data-animate="fade-right">
+        <div class="about-image-frame">
+          <div class="about-image-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>Снимка на д-р Пенкова</p>
+          </div>
+          <div class="about-cert-badge">
+            <strong>2006</strong>
+            <span>Сертифициран имплантолог</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text-col" data-animate="fade-left" data-delay="100">
+        <span class="section-label">За нас</span>
+        <h2 class="section-title">Д-р Галя Пенкова — <em>Основател на DreamDent</em></h2>
+        <div class="gold-divider left"></div>
+        <p class="about-text">
+          Д-р Галя Пенкова завършва Медицински университет — София, специалност „Дентална медицина" през 2000 г. Сертифициран имплантолог от 2006 г., специализирала в Нюрнберг, Мюнхен и Генуа.
+        </p>
+        <p class="about-text">
+          В Имплантологичен Център DreamDent се извършват стотици имплантологични операции годишно, с които се възстановяват говорната и дъвкателната функция на пациентите при постигане на съвършена естетика.
+        </p>
+        <ul class="about-highlights">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Специализация в IFZI Mauthale Нюрнберг, Германия
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            International Implant Foundation, Мюнхен
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Universitá degli Studi di Genova, Италия (2015)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            TeethXpress — протоколи за незабавно натоварване
+          </li>
+        </ul>
+        <a href="/екип" class="btn btn-outline" style="margin-top: 1rem;">
+          Вижте целия екип
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials-section section-dark">
+    <div class="container">
+      <header class="section-header text-center" data-animate="fade-up">
+        <span class="section-label">Отзиви</span>
+        <h2 class="section-title">Какво казват нашите <em>пациенти</em></h2>
+        <div class="gold-divider"></div>
+        <p class="section-subtitle" style="color: rgba(250,247,242,0.65);">
+          Над 158 отзива с оценка 4.9 / 5
+        </p>
+      </header>
+      <div class="grid-3" style="margin-top: 3rem;">
+        {testimonials.map((t, i) => (
+          <TestimonialCard {...t} delay={i * 150} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dental Tourism Banner -->
+  <section class="section tourism-banner">
+    <div class="container tourism-inner">
+      <div data-animate="fade-right">
+        <span class="section-label">Дентален туризъм</span>
+        <h2 class="section-title" style="color: var(--color-cream);">
+          Живеете в чужбина? <em>Елате при нас</em>
+        </h2>
+        <p style="color: rgba(250,247,242,0.7); max-width: 480px; line-height: 1.75; margin-bottom: 2rem;">
+          Ако живеете в Гърция, Германия, Франция, Италия или другаде — ще Ви съдействаме за провеждане на имплантологичното Ви лечение в най-кратък срок. Комбинирайте полезното с приятното — почивка в България и решаване на денталните ви проблеми.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <a href="/дентален-туризъм" class="btn btn-primary">Научете повече</a>
+          <a href="/контакти" class="btn btn-outline">Свържете се с нас</a>
+        </div>
+      </div>
+      <div class="tourism-steps" data-animate="fade-left" data-delay="200">
+        {[
+          { step: '01', title: 'Уговорете час', desc: 'Изпратете панорамна рентгенова снимка по имейл за предварителна консултация' },
+          { step: '02', title: 'Пристигнете', desc: 'При необходимост осигуряваме трансфер и настаняване' },
+          { step: '03', title: 'Лечение', desc: 'CBCT анализ, поставяне на импланти, временни зъби за нормален живот' },
+          { step: '04', title: 'Завършете', desc: 'Постоянните зъби се фиксират. Пациентите нямат ограничения в храната' },
+        ].map((item) => (
+          <div class="tourism-step">
+            <span class="tourism-step-num">{item.step}</span>
+            <div>
+              <strong>{item.title}</strong>
+              <p>{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+      <div data-animate="fade-right">
+        <span class="section-label">Контакти</span>
+        <h2 class="section-title">Запишете <em>час</em></h2>
+        <div class="gold-divider left"></div>
+        <p class="section-subtitle">
+          Свържете се с нас за консултация или запитване. Ще отговорим в рамките на работния ден.
+        </p>
+        <div class="contact-info-list" style="margin-top: 2rem;">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📍</div>
+            <div>
+              <strong>Адрес</strong>
+              <span>гр. Плевен, бул. „Русе" №17, ет. 1, каб. 2</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📞</div>
+            <div>
+              <strong>Телефон</strong>
+              <a href="tel:+359887513752">0887 513 752</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div>
+              <strong>Имейл</strong>
+              <a href="mailto:info@dreamdent.eu">info@dreamdent.eu</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🕐</div>
+            <div>
+              <strong>Работно време</strong>
+              <span>Пн, Чт: 12:30 – 18:30</span>
+              <span>Вт, Ср, Пт: 8:30 – 13:30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-animate="fade-left" data-delay="100">
+        <ContactForm lang={lang} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* Services Section */
+.services-section { background: var(--color-cream); }
+
+.section-header { max-width: 700px; margin-inline: auto; margin-bottom: 0; }
+
+/* About Section */
+.about-section { background: var(--color-dark-mid); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.about-image-frame {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(200, 169, 110, 0.25);
+}
+
+.about-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 100%;
+  background: rgba(200, 169, 110, 0.05);
+  color: rgba(250, 247, 242, 0.3);
+  font-size: 0.85rem;
+}
+
+.about-cert-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  right: -1rem;
+  background: var(--color-gold);
+  color: var(--color-dark);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.about-cert-badge strong { font-family: var(--font-serif); font-size: 1.75rem; line-height: 1; }
+.about-cert-badge span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-align: center; }
+
+.about-text {
+  color: rgba(250, 247, 242, 0.72);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.about-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: rgba(250, 247, 242, 0.8);
+}
+
+.about-highlights li svg { color: var(--color-gold); flex-shrink: 0; }
+
+/* Testimonials */
+.testimonials-section { background: var(--color-dark); }
+
+/* Tourism */
+.tourism-banner {
+  background: linear-gradient(135deg, #1A1208 0%, #2C2015 50%, #1A1208 100%);
+  padding-block: var(--section-py);
+}
+
+.tourism-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.tourism-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tourism-step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.tourism-step-num {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  opacity: 0.5;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.tourism-step strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  margin-bottom: 0.25rem;
+}
+
+.tourism-step p {
+  font-size: 0.85rem;
+  color: rgba(250, 247, 242, 0.6);
+  line-height: 1.6;
+}
+
+/* Contact */
+.contact-section { background: var(--color-cream); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-info-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.contact-info-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.contact-info-item strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.contact-info-item span,
+.contact-info-item a {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+}
+
+.contact-info-item a:hover { color: var(--color-gold); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-grid,
+  .tourism-inner,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-image-col { display: none; }
+}
+</style>

@@ -1,0 +1,107 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+const lang = 'bg';
+---
+
+<BaseLayout
+  title="Имплантология — Зъбни импланти в Плевен"
+  description="Зъбни импланти в Плевен. Д-р Галя Пенкова — сертифициран имплантолог от 2006 г. CBCT 3D диагностика. Стотици успешни операции годишно."
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <div class="breadcrumb">
+        <a href="/">Начало</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Имплантология</span>
+      </div>
+      <span class="section-label">Услуги</span>
+      <h1>Имплантология</h1>
+      <p class="hero-sub">Съвременната алтернатива на липсващите зъби</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container content-grid">
+      <article class="content-body" data-animate="fade-up">
+        <h2>Какво представляват зъбните импланти?</h2>
+        <p>
+          Имплантите са съвременната алтернатива на липсващите зъби. След изваждане на зъб, беззъбният участък започва да стареее и костта атрофира, ако не се натоварва (ако не се дъвче там). Това води до свиване на костните ръбове и до стареещ вид на лицето.
+        </p>
+        <p>
+          Ако скоро след изваждането на зъба се планира имплантиране, се спира стареенето на костта. Зъбите и костта, която ги задържа, са проектирани да бъдат постоянно натоварени при дъвчене.
+        </p>
+
+        <h2>CBCT 3D диагностика</h2>
+        <p>
+          В клиника DreamDent работим с най-съвременна апаратура, включително CBCT (Cone Beam Computed Tomography) — триизмерна рентгенова снимка, която ни дава пълна картина на костната структура и анатомия преди поставяне на имплант.
+        </p>
+
+        <h2>Процедура стъпка по стъпка</h2>
+        <ol class="steps-list">
+          <li>
+            <strong>Преглед и консултация</strong> — Анализ на рентгенова снимка, обсъждане на план за лечение
+          </li>
+          <li>
+            <strong>CBCT анализ и планиране</strong> — 3D снимка и компютърно планиране на позицията на импланта
+          </li>
+          <li>
+            <strong>Поставяне на имплант</strong> — Минимално инвазивна хирургична процедура
+          </li>
+          <li>
+            <strong>Временни зъби</strong> — Изработват се временни зъби, с които пациентът може да се храни и да поддържа нормален социален живот до края на периода на зарастване
+          </li>
+          <li>
+            <strong>Постоянни зъби</strong> — Вземат се отпечатъци за постоянните зъби. След готовността им те се фиксират. Пациентите с импланти нямат ограничения за вид храна.
+          </li>
+        </ol>
+
+        <div class="info-box">
+          <h3>💡 Знаехте ли?</h3>
+          <p>В Имплантологичен Център DreamDent се извършват стотици имплантологични операции годишно, с които се възстановяват говорната и дъвкателната функция на пациентите, като се постига и съвършена естетика.</p>
+        </div>
+      </article>
+
+      <aside class="content-sidebar">
+        <div class="sidebar-card" data-animate="fade-left">
+          <h3>Запишете час</h3>
+          <p>Свържете се с нас за безплатна консултация по имплантология.</p>
+          <ContactForm lang={lang} />
+        </div>
+        <div class="sidebar-info" data-animate="fade-left" data-delay="100">
+          <h4>Д-р Галя Пенкова</h4>
+          <ul>
+            <li>✓ Сертифициран имплантолог от 2006 г.</li>
+            <li>✓ Специализация в Германия и Италия</li>
+            <li>✓ TeethXpress протоколи</li>
+            <li>✓ Над 2000 поставени импланти</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero { background: var(--color-dark); padding: clamp(6rem, 12vw, 10rem) 0 clamp(3rem, 6vw, 5rem); }
+.page-hero h1 { color: var(--color-cream); margin-top: 0.5rem; }
+.hero-sub { color: rgba(250,247,242,0.6); font-size: 1.1rem; margin-top: 0.5rem; }
+.content-grid { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: start; }
+.content-body h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; color: var(--color-dark); }
+.content-body p { color: var(--color-text-muted); line-height: 1.8; margin-bottom: 1rem; }
+.steps-list { padding-left: 1.5rem; display: flex; flex-direction: column; gap: 1rem; margin-block: 1rem; }
+.steps-list li { color: var(--color-text-muted); line-height: 1.7; }
+.steps-list strong { color: var(--color-dark); }
+.info-box { background: var(--color-cream-dark); border-left: 3px solid var(--color-gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 1.5rem; margin-top: 2rem; }
+.info-box h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.info-box p { margin: 0; font-size: 0.9rem; }
+.sidebar-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 1.5rem; }
+.sidebar-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.sidebar-card p { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1.25rem; }
+.sidebar-info { background: var(--color-dark); color: var(--color-cream); border-radius: var(--radius-md); padding: 1.5rem; }
+.sidebar-info h4 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-gold); margin-bottom: 1rem; }
+.sidebar-info ul { display: flex; flex-direction: column; gap: 0.5rem; }
+.sidebar-info li { font-size: 0.875rem; color: rgba(250,247,242,0.8); }
+@media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+</style>

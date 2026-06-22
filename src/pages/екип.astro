@@ -1,0 +1,170 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+const lang = 'bg';
+---
+
+<BaseLayout
+  title="Нашият екип — Д-р Галя Пенкова — DreamDent"
+  description="Запознайте се с екипа на DreamDent. Д-р Галя Пенкова — сертифициран имплантолог от 2006 г. Специализации в Германия и Италия."
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <span class="section-label">DreamDent</span>
+      <h1>Нашият екип</h1>
+      <p class="hero-sub">Опитни специалисти, посветени на вашето здраве</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <!-- Dr. Penkova -->
+      <div class="doctor-card" data-animate="fade-up">
+        <div class="doctor-photo-wrap">
+          <div class="doctor-photo-placeholder">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>Снимка на<br>д-р Пенкова</p>
+          </div>
+        </div>
+        <div class="doctor-info">
+          <span class="section-label">Основател и главен лекар</span>
+          <h2>Д-р Галя Пенкова</h2>
+          <div class="gold-divider left"></div>
+          <p class="doctor-bio">
+            Д-р Галя Пенкова завършва Медицински университет — София, специалност „Дентална медицина" през 2000 г. Сертифициран имплантолог от 2006 г. През годините д-р Пенкова е развила уменията си в областта на имплантологията чрез участие в многобройни квалификации, курсове и конгреси в България и чужбина.
+          </p>
+          <p class="doctor-bio">
+            Специализира при Академик Попов — основателя на имплантологията в България.
+          </p>
+
+          <h3 class="specializations-title">Специализации и курсове</h3>
+          <ul class="specializations-list">
+            {[
+              { year: '2006', text: 'Едногодишно модулно обучение в IFZI Mauthale Nürnberg, Германия' },
+              { year: '2006', text: 'Сертификат от International Implant Foundation, Мюнхен — имплантно протезиране с директно натоварване' },
+              { year: '2015', text: 'Едногодишно обучение в Universitá degli Studi di Genova — Нови технологии в напредналата пародонтология и имплантология' },
+              { year: '2017', text: 'Plasmolifting сертификация' },
+              { year: '2018', text: 'Level Up Resto Style Italiano' },
+              { year: '2018', text: 'TeethXpress — протоколи за незабавно натоварване на импланти' },
+              { year: '2019', text: 'Soft Tissue Restoration And Perioral Rejuvenation With HA Fillers' },
+            ].map((s) => (
+              <li class="spec-item">
+                <span class="spec-year">{s.year}</span>
+                <span class="spec-text">{s.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Dr. Todorov placeholder -->
+      <div class="doctor-card doctor-card--secondary" data-animate="fade-up" data-delay="100">
+        <div class="doctor-photo-wrap">
+          <div class="doctor-photo-placeholder">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>Снимка на<br>д-р Тодоров</p>
+          </div>
+        </div>
+        <div class="doctor-info">
+          <span class="section-label">Дентален лекар</span>
+          <h2>Д-р Тодоров</h2>
+          <div class="gold-divider left"></div>
+          <p class="doctor-bio">
+            Д-р Тодоров е ценен член на екипа на DreamDent, известен с внимателното си отношение към пациентите и задълбочените си познания. Пациентите споделят, че получават не само качествено лечение, но и ценни съвети за устна хигиена и дългосрочно здраве на зъбите.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact CTA -->
+      <div class="team-contact" data-animate="fade-up" data-delay="200">
+        <h3>Запишете час при нас</h3>
+        <p>Свържете се с нашия екип за консултация или запитване.</p>
+        <div style="max-width: 600px; margin-top: 1.5rem;">
+          <ContactForm lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero { background: var(--color-dark); padding: clamp(6rem, 12vw, 10rem) 0 clamp(3rem, 6vw, 5rem); }
+.page-hero h1 { color: var(--color-cream); margin-top: 0.5rem; }
+.hero-sub { color: rgba(250,247,242,0.6); font-size: 1.1rem; margin-top: 0.5rem; }
+
+.doctor-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 4rem;
+  align-items: start;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 1rem;
+}
+
+.doctor-card--secondary { opacity: 0.9; }
+
+.doctor-photo-wrap { position: relative; }
+
+.doctor-photo-placeholder {
+  aspect-ratio: 3/4;
+  background: var(--color-cream-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.doctor-info h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.5rem; }
+.doctor-bio { color: var(--color-text-muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+
+.specializations-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: var(--color-dark);
+}
+
+.specializations-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.spec-item {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.spec-year {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  flex-shrink: 0;
+  min-width: 40px;
+}
+
+.spec-text { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; }
+
+.team-contact {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.team-contact h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.team-contact p { color: var(--color-text-muted); }
+.team-contact > div { margin-inline: auto; }
+
+@media (max-width: 900px) {
+  .doctor-card { grid-template-columns: 1fr; gap: 2rem; }
+  .doctor-photo-wrap { max-width: 280px; margin-inline: auto; }
+  .spec-item { flex-direction: column; gap: 0.25rem; }
+}
+</style>

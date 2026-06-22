@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "author": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "textEn": {
+      "type": "string"
+    },
+    "rating": {
+      "default": 5,
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "author",
+    "text"
+  ]
+}

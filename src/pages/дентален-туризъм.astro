@@ -1,0 +1,131 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+const lang = 'bg';
+---
+
+<BaseLayout
+  title="Дентален туризъм — DreamDent Плевен, България"
+  description="Дентален туризъм в България. Съдействаме на пациенти от Гърция, Германия, Франция, Италия. Трансфер и настаняване."
+>
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <span class="section-label">За международни пациенти</span>
+      <h1>Дентален туризъм</h1>
+      <p class="hero-sub">Комбинирайте лечение с почивка в България</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container content-two-col">
+      <div class="content-main" data-animate="fade-up">
+        <h2>Защо да изберете DreamDent?</h2>
+        <p>Ако живеете в чужбина — Гърция, Германия, Франция, Италия или другаде — ние ще Ви съдействаме за провеждане на имплантологичното Ви лечение в най-кратък срок. Комбинирайте полезното с приятното — почивка в България и решаване на денталните Ви проблеми.</p>
+
+        <h2>Как работи?</h2>
+        <div class="steps-vertical">
+          {[
+            {
+              n: '01',
+              title: 'Изпратете рентгенова снимка',
+              desc: 'Може да се изпрати панорамна рентгенова снимка по електронен път на info@dreamdent.eu за предварителна оценка.',
+            },
+            {
+              n: '02',
+              title: 'Уговорете час (поне 1 месец предварително)',
+              desc: 'Договаряме ден и период на престой, удобен за Вас.',
+            },
+            {
+              n: '03',
+              title: 'Пристигнете в Плевен',
+              desc: 'При необходимост осигуряваме трансфер от летище и настаняване в удобен хотел.',
+            },
+            {
+              n: '04',
+              title: 'Лечение',
+              desc: 'CBCT анализ (3D снимка) и поставяне на имплантите. Изработват се временни зъби, с които пациентът може да се храни и да поддържа нормален социален живот.',
+            },
+            {
+              n: '05',
+              title: 'Постоянни зъби',
+              desc: 'Вземат се отпечатъци за постоянните зъби. След готовността им те се фиксират. Пациентите с импланти нямат ограничения за вид храна.',
+            },
+          ].map((s) => (
+            <div class="step-v">
+              <div class="step-v-num">{s.n}</div>
+              <div>
+                <strong>{s.title}</strong>
+                <p>{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="countries-section">
+          <h2>Пациенти от цял свят</h2>
+          <p>Приемаме пациенти от:</p>
+          <div class="countries-grid">
+            {['🇬🇷 Гърция', '🇩🇪 Германия', '🇫🇷 Франция', '🇮🇹 Италия', '🇬🇧 Великобритания', '🇦🇹 Австрия', '🇧🇪 Белгия', '🇨🇭 Швейцария', '🇳🇱 Холандия', '🇸🇪 Швеция'].map((c) => (
+              <span class="country-badge">{c}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <aside class="content-sidebar">
+        <div class="sidebar-card sticky" data-animate="fade-left">
+          <h3>Запишете час</h3>
+          <p>Изпратете запитване — ще отговорим в рамките на работния ден.</p>
+          <ContactForm lang={lang} />
+        </div>
+        <div class="contact-quick" data-animate="fade-left" data-delay="100">
+          <h4>Бърза връзка</h4>
+          <a href="tel:+359887513752" class="quick-link">
+            <span>📞</span>
+            <div>
+              <strong>+359 887 513 752</strong>
+              <span>Говорим Английски, Български</span>
+            </div>
+          </a>
+          <a href="mailto:info@dreamdent.eu" class="quick-link">
+            <span>📧</span>
+            <div>
+              <strong>info@dreamdent.eu</strong>
+              <span>Изпратете рентгенова снимка</span>
+            </div>
+          </a>
+          <div class="quick-link">
+            <span>📍</span>
+            <div>
+              <strong>Плевен, България</strong>
+              <span>бул. „Русе" №17, ет. 1, каб. 2</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}
+.content-two-col{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
+.content-main h2{font-size:1.5rem;margin:2rem 0 0.75rem;color:var(--color-dark)}.content-main p{color:var(--color-text-muted);line-height:1.8;margin-bottom:1rem}
+.steps-vertical{display:flex;flex-direction:column;gap:1.5rem;margin-block:1.5rem}.step-v{display:flex;gap:1.25rem;align-items:flex-start}
+.step-v-num{font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--color-gold);opacity:0.5;flex-shrink:0;min-width:36px;line-height:1.1}
+.step-v strong{display:block;font-size:0.95rem;color:var(--color-dark);margin-bottom:0.3rem}.step-v p{font-size:0.875rem;color:var(--color-text-muted);line-height:1.6;margin:0}
+.countries-section{margin-top:2.5rem}.countries-grid{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem}
+.country-badge{background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-full);padding:0.35rem 0.875rem;font-size:0.85rem;color:var(--color-text-muted)}
+.sidebar-card{background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1.75rem;margin-bottom:1.5rem}.sidebar-card.sticky{position:sticky;top:88px}
+.sidebar-card h3{font-size:1.25rem;margin-bottom:0.5rem}.sidebar-card p{font-size:0.875rem;color:var(--color-text-muted);margin-bottom:1.25rem}
+.contact-quick{background:var(--color-dark);border-radius:var(--radius-md);padding:1.5rem}
+.contact-quick h4{font-family:var(--font-serif);font-size:1rem;color:var(--color-gold);margin-bottom:1.25rem}
+.quick-link{display:flex;gap:0.875rem;align-items:flex-start;margin-bottom:1rem;color:var(--color-cream);transition:var(--transition)}
+.quick-link:last-child{margin-bottom:0}
+.quick-link span:first-child{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.quick-link strong{display:block;font-size:0.875rem;color:var(--color-cream);margin-bottom:2px}
+.quick-link span:last-child{font-size:0.75rem;color:rgba(250,247,242,0.5)}
+.quick-link:hover strong{color:var(--color-gold)}
+@media(max-width:900px){.content-two-col{grid-template-columns:1fr}}
+</style>

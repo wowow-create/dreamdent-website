@@ -1,0 +1,38 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+const lang = 'bg';
+---
+<BaseLayout title="Пародонтология — DreamDent Плевен" description="Лечение на венци в Плевен. Пародонтология, отстраняване на зъбен камък, лечение на гингивит.">
+  <div class="page-hero"><div class="container" data-animate="fade-up">
+    <div class="breadcrumb"><a href="/">Начало</a><span class="breadcrumb-sep">/</span><span>Пародонтология</span></div>
+    <span class="section-label">Услуги</span><h1>Пародонтология</h1>
+    <p class="hero-sub">Здрави венци — основата на здравите зъби</p>
+  </div></div>
+  <section class="section"><div class="container content-grid">
+    <article class="content-body" data-animate="fade-up">
+      <h2>Зъбен камък и венци</h2>
+      <p>Когато зъбният камък се натрупва и залага по зъбите, те губят естествената си гладкост и белота. Но това обаче води не само до козметичен проблем. Неравностите на зъбната повърхност създават отлични условия за задържането на микроби и зъбна плака, а те водят до възпаление на венците — гингивит. Венците започват да кървят.</p>
+      <h2>Нашите пародонтологични услуги</h2>
+      <ul class="service-list">
+        <li><strong>Отстраняване на зъбен камък (scaling)</strong> — Ултразвуково и ръчно почистване на зъбния камък надвенечно и подвенечно.</li>
+        <li><strong>Лечение на гингивит</strong> — Лечение на ранните форми на венечно заболяване.</li>
+        <li><strong>Лечение на пародонтит</strong> — Комплексно лечение на напреднали форми на пародонтално заболяване.</li>
+        <li><strong>Пародонтална хирургия</strong> — Хирургично третиране при дълбоки пародонтални джобове.</li>
+        <li><strong>Поддържаща пародонтална терапия</strong> — Редовни профилактични прегледи за поддържане на здравето на венците.</li>
+      </ul>
+      <div class="info-box">
+        <h3>🩺 Важно</h3>
+        <p>Венечните заболявания са свързани с общото здраве. Пародонтитът е рисков фактор за сърдечно-съдови заболявания, диабет и усложнения по време на бременност. Редовните профилактични прегледи са от съществено значение.</p>
+      </div>
+    </article>
+    <aside class="content-sidebar">
+      <div class="sidebar-card" data-animate="fade-left"><h3>Запишете час</h3><p>Консултация по пародонтология.</p><ContactForm lang={lang} /></div>
+    </aside>
+  </div></section>
+</BaseLayout>
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}.content-grid{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}.content-body h2{font-size:1.5rem;margin:2rem 0 0.75rem}.content-body p{color:var(--color-text-muted);line-height:1.8;margin-bottom:1rem}.service-list{padding-left:1.5rem;display:flex;flex-direction:column;gap:1rem;margin-block:1rem}.service-list li{color:var(--color-text-muted);line-height:1.7}.service-list strong{color:var(--color-dark)}.info-box{background:var(--color-cream-dark);border-left:3px solid var(--color-gold);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:1.5rem;margin-top:2rem}.info-box h3{font-size:1.1rem;margin-bottom:0.5rem}.info-box p{margin:0;font-size:0.9rem}.sidebar-card{background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1.75rem}.sidebar-card h3{font-size:1.25rem;margin-bottom:0.5rem}.sidebar-card p{font-size:0.875rem;color:var(--color-text-muted);margin-bottom:1.25rem}
+@media(max-width:900px){.content-grid{grid-template-columns:1fr}}
+</style>

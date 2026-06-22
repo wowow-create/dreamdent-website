@@ -1,0 +1,81 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+let posts: Awaited<ReturnType<typeof getCollection>>  = [];
+try {
+  const allPosts = await getCollection('posts');
+  posts = allPosts.sort(
+    (a, b) => new Date(b.data.date as Date).getTime() - new Date(a.data.date as Date).getTime()
+  );
+} catch {
+  // empty collection
+}
+---
+
+<BaseLayout title="Новини — DreamDent" description="Новини и полезни съвети от DreamDent — Дентален Център Плевен.">
+  <div class="page-hero">
+    <div class="container" data-animate="fade-up">
+      <span class="section-label">Актуално</span>
+      <h1>Новини</h1>
+      <p class="hero-sub">Полезни съвети и новини от нашата практика</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      {posts.length === 0 ? (
+        <div class="posts-empty" data-animate="fade-up">
+          <div class="empty-icon">📰</div>
+          <h3>Все още няма публикувани новини</h3>
+          <p>
+            Добавете новини от admin панела на адрес <code>/keystatic</code>.
+            Новите публикации ще се показват автоматично тук.
+          </p>
+          <a href="/keystatic" class="btn btn-outline" style="margin-top: 1.5rem;">Admin Панел</a>
+        </div>
+      ) : (
+        <div class="posts-grid">
+          {posts.map((post, i) => (
+            <article class="post-card" data-animate="fade-up" data-delay={i * 100}>
+              <div class="post-image-placeholder" aria-hidden="true">
+                <span>📰</span>
+              </div>
+              <div class="post-body">
+                <time class="post-date" datetime={String(post.data.date)}>
+                  {new Date(post.data.date).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </time>
+                <h2 class="post-title">
+                  <a href={`/новини/${post.slug}`}>{post.data.title}</a>
+                </h2>
+                {post.data.excerpt && (
+                  <p class="post-excerpt">{post.data.excerpt}</p>
+                )}
+                <a href={`/новини/${post.slug}`} class="post-read-more">
+                  Прочетете повече
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-hero{background:var(--color-dark);padding:clamp(6rem,12vw,10rem) 0 clamp(3rem,6vw,5rem)}.page-hero h1{color:var(--color-cream);margin-top:0.5rem}.hero-sub{color:rgba(250,247,242,0.6);font-size:1.1rem;margin-top:0.5rem}
+.posts-empty{text-align:center;padding:5rem 2rem;background:var(--color-cream-dark);border-radius:var(--radius-lg);border:2px dashed var(--color-border)}.empty-icon{font-size:3rem;margin-bottom:1rem}.posts-empty h3{font-size:1.3rem;margin-bottom:0.5rem}.posts-empty p{color:var(--color-text-muted);max-width:480px;margin-inline:auto;line-height:1.7}.posts-empty code{background:var(--color-white);padding:0.15rem 0.4rem;border-radius:3px;font-size:0.9em;color:var(--color-gold-dark)}
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem}
+.post-card{background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;transition:var(--transition)}
+.post-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--color-gold-light)}
+.post-image-placeholder{aspect-ratio:16/9;background:var(--color-cream-dark);display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.post-body{padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem}
+.post-date{font-size:0.8rem;font-weight:500;letter-spacing:0.05em;color:var(--color-gold-dark);text-transform:uppercase}
+.post-title{font-size:1.15rem;line-height:1.3}.post-title a:hover{color:var(--color-gold)}
+.post-excerpt{font-size:0.875rem;color:var(--color-text-muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.post-read-more{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-gold-dark);transition:var(--transition);margin-top:auto}
+.post-read-more:hover{gap:0.7rem}
+</style>
