@@ -10,7 +10,10 @@ export default defineConfig({
   }),
   vite: {
     optimizeDeps: {
-      exclude: ['@keystatic/core'],
+      exclude: ['@keystatic/core', '@keystatic/astro'],
+    },
+    ssr: {
+      external: ['@keystatic/core', '@keystatic/astro'],
     },
   },
   integrations: [
