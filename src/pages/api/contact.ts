@@ -78,34 +78,35 @@ export const POST: APIRoute = async ({ request }) => {
     </div>`;
 
   try {
-    const [r1, r2] = await Promise.all([
-      fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: 'DreamDent Website <onboarding@resend.dev>',
-          to: [contactEmail],
-          subject: `Ново запитване от ${name}`,
-          html: notificationHtml,
-        }),
+    // Primary: notify the clinic — must succeed
+    const r1 = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'DreamDent Website <onboarding@resend.dev>',
+        to: [contactEmail],
+        subject: `Ново запитване от ${name}`,
+        html: notificationHtml,
       }),
-      fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: 'DreamDent <onboarding@resend.dev>',
-          to: [email],
-          subject: 'Потвърждение — DreamDent получи Вашето запитване',
-          html: autoReplyHtml,
-        }),
-      }),
-    ]);
+    });
 
-    if (!r1.ok || !r2.ok) {
-      const err = await (r1.ok ? r2 : r1).text();
-      console.error('Resend error:', err);
+    if (!r1.ok) {
+      const err = await r1.text();
+      console.error('Resend notification error:', err);
       return new Response(JSON.stringify({ error: 'Failed to send email' }), { status: 500 });
     }
+
+    // Secondary: auto-reply to patient — best-effort, don't fail on error
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'DreamDent <onboarding@resend.dev>',
+        to: [email],
+        subject: 'Потвърждение — DreamDent получи Вашето запитване',
+        html: autoReplyHtml,
+      }),
+    }).catch((e) => console.error('Auto-reply failed (non-critical):', e));
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
