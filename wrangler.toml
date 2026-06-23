@@ -6,3 +6,6 @@ assets = { directory = "dist/client" }
 
 [vars]
 NODE_ENV = "production"
+CONTACT_EMAIL = "galyapenkovatodorova@gmail.com"
+
+# RESEND_API_KEY се пази като Secret в Cloudflare Dashboard (не тук!)
