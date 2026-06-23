@@ -3,7 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   let body: { name?: string; email?: string; phone?: string; message?: string };
 
   try {
@@ -23,8 +23,10 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Invalid email' }), { status: 400 });
   }
 
-  const resendKey = import.meta.env.RESEND_API_KEY;
-  const contactEmail = import.meta.env.CONTACT_EMAIL ?? 'info@dreamdent.eu';
+  // Cloudflare Workers passes env vars via locals.runtime.env
+  const cfEnv = (locals as { runtime?: { env?: Record<string, string> } }).runtime?.env ?? {};
+  const resendKey = cfEnv.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+  const contactEmail = cfEnv.CONTACT_EMAIL ?? import.meta.env.CONTACT_EMAIL ?? 'info@dreamdent.eu';
 
   if (!resendKey) {
     console.error('RESEND_API_KEY not set');
