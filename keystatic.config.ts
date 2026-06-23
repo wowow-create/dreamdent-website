@@ -1,18 +1,17 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-const repoOwner = process.env.GITHUB_REPO_OWNER;
-const repoName = process.env.GITHUB_REPO_NAME;
-// Use import.meta.env.DEV (Vite/Astro built-in) instead of NODE_ENV,
-// because wrangler.toml injects NODE_ENV=production even in local dev via platformProxy.
-const isProd = !import.meta.env.DEV && !!repoOwner && !!repoName;
+// import.meta.env.DEV is replaced at build time by Vite/Astro:
+// false in production builds → isProd = true → GitHub storage
+// true in local dev → isProd = false → local storage
+const isProd = !import.meta.env.DEV;
 
 export default config({
   storage: isProd
     ? {
         kind: 'github',
         repo: {
-          owner: repoOwner as string,
-          name: repoName as string,
+          owner: 'wowow-create',
+          name: 'dreamdent-website',
         },
       }
     : { kind: 'local' },
