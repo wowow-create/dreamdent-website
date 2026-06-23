@@ -6,7 +6,7 @@ import keystatic from '@keystatic/astro';
 export default defineConfig({
   output: 'static',
   adapter: cloudflare({
-    platformProxy: { enabled: true },
+    platformProxy: { enabled: process.env.CF_PROXY !== 'false' },
     imageService: 'passthrough',
     imagesBindingName: undefined,
     sessionKVBindingName: undefined,
@@ -14,6 +14,9 @@ export default defineConfig({
   vite: {
     optimizeDeps: {
       exclude: ['@keystatic/core', '@keystatic/astro'],
+    },
+    ssr: {
+      noExternal: ['@keystatic/astro', '@keystatic/core'],
     },
   },
   integrations: [
