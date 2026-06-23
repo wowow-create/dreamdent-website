@@ -1,0 +1,574 @@
+---
+interface Review {
+  author: string;
+  rating: number;
+  text: string;
+  date: string;
+  initials: string;
+  avatarColor: string;
+}
+
+interface Props {
+  lang?: 'bg' | 'en';
+}
+
+const { lang = 'bg' } = Astro.props;
+
+const googleMapsUrl = 'https://share.google/kwsknrCuyJWrEkgzr';
+const overallRating = 4.9;
+const totalReviews = 158;
+
+const reviewsBg: Review[] = [
+  {
+    author: 'Силвия Иванова',
+    rating: 5,
+    text: 'Искам да благодаря от името на моята майка на Доктор Пенкова и нейния екип за изключителното отношение и професионализъм. Усмивката се върна и заедно с нея — щастието. Искрено препоръчвам!',
+    date: 'декември 2024',
+    initials: 'СИ',
+    avatarColor: '#7C6B9E',
+  },
+  {
+    author: 'Мария Тодорова',
+    rating: 5,
+    text: 'Много благодаря на Д-р Пенкова за вниманието и големите професионални умения! Възстанових един зъб, който мислех, че никога няма да имам. Имплантът се чувства като мой собствен зъб!',
+    date: 'ноември 2024',
+    initials: 'МТ',
+    avatarColor: '#5A8E6B',
+  },
+  {
+    author: 'Галина Стоянова',
+    rating: 5,
+    text: 'Изказвам искрената си благодарност на д-р Пенкова и екипа! Сърдечно благодаря за красивата усмивка, с която ме направихте щастлива. Пожелавам Ви още много професионални успехи!',
+    date: 'октомври 2024',
+    initials: 'ГС',
+    avatarColor: '#8E5A5A',
+  },
+  {
+    author: 'Петър Николов',
+    rating: 5,
+    text: 'Страхотна клиника! Д-р Пенкова е изключително внимателна и компетентна. Процедурата беше безболезнена, а резултатите — невероятни. Препоръчвам на всички, които искат качествена дентална грижа.',
+    date: 'септември 2024',
+    initials: 'ПН',
+    avatarColor: '#5A6E8E',
+  },
+  {
+    author: 'Десислава Георгиева',
+    rating: 5,
+    text: 'Бях много притеснена преди имплантацията, но екипът ме успокои от самото начало. Д-р Пенкова обясни всеки детайл. Минаха 6 месеца и съм напълно доволна. Благодаря от сърце!',
+    date: 'август 2024',
+    initials: 'ДГ',
+    avatarColor: '#8E7A5A',
+  },
+  {
+    author: 'Христо Димитров',
+    rating: 5,
+    text: 'Живея в Германия и специално дойдох в DreamDent за имплант. Цената е значително по-ниска от немските клиники, а качеството — на европейско ниво. Определено ще се върна!',
+    date: 'юли 2024',
+    initials: 'ХД',
+    avatarColor: '#6B8E5A',
+  },
+];
+
+const reviewsEn: Review[] = [
+  {
+    author: 'Sylvia Ivanova',
+    rating: 5,
+    text: 'I want to thank Dr. Penkova and her team on behalf of my mother for their exceptional care and professionalism. The smile is back, and with it — happiness. Highly recommended!',
+    date: 'December 2024',
+    initials: 'SI',
+    avatarColor: '#7C6B9E',
+  },
+  {
+    author: 'Maria Todorova',
+    rating: 5,
+    text: 'Many thanks to Dr. Penkova for her attention and great professional skills! I restored a tooth I thought I would never have. The implant feels like my own natural tooth!',
+    date: 'November 2024',
+    initials: 'MT',
+    avatarColor: '#5A8E6B',
+  },
+  {
+    author: 'Galina Stoyanova',
+    rating: 5,
+    text: 'I express my sincere gratitude to Dr. Penkova and the team! Thank you so much for the beautiful smile that made me happy. I wish you many more professional successes!',
+    date: 'October 2024',
+    initials: 'GS',
+    avatarColor: '#8E5A5A',
+  },
+  {
+    author: 'Peter Nikolov',
+    rating: 5,
+    text: 'Amazing clinic! Dr. Penkova is extremely attentive and competent. The procedure was painless and the results are incredible. I recommend to everyone who wants quality dental care.',
+    date: 'September 2024',
+    initials: 'PN',
+    avatarColor: '#5A6E8E',
+  },
+  {
+    author: 'Desislava Georgieva',
+    rating: 5,
+    text: 'I was very nervous before the implantation, but the team calmed me from the very beginning. Dr. Penkova explained every detail. 6 months later and I am completely satisfied. Thank you from the heart!',
+    date: 'August 2024',
+    initials: 'DG',
+    avatarColor: '#8E7A5A',
+  },
+  {
+    author: 'Hristo Dimitrov',
+    rating: 5,
+    text: 'I live in Germany and came specifically to DreamDent for an implant. The price is significantly lower than German clinics, and the quality is at European level. I will definitely come back!',
+    date: 'July 2024',
+    initials: 'HD',
+    avatarColor: '#6B8E5A',
+  },
+];
+
+const reviews = lang === 'en' ? reviewsEn : reviewsBg;
+const sectionLabel = lang === 'en' ? 'Google Reviews' : 'Google Ревюта';
+const sectionTitle = lang === 'en' ? 'What our <em>patients</em> say' : 'Какво казват нашите <em>пациенти</em>';
+const ratingLabel = lang === 'en' ? `${overallRating} out of 5 · ${totalReviews} reviews` : `${overallRating} от 5 · ${totalReviews} ревюта`;
+const ctaText = lang === 'en' ? 'See all reviews on Google' : 'Всички ревюта в Google';
+const prevLabel = lang === 'en' ? 'Previous' : 'Предишно';
+const nextLabel = lang === 'en' ? 'Next' : 'Следващо';
+---
+
+<section class="section reviews-section">
+  <div class="container">
+    <header class="reviews-header" data-animate="fade-up">
+      <div class="reviews-header-text">
+        <span class="section-label">{sectionLabel}</span>
+        <h2 class="section-title" set:html={sectionTitle}></h2>
+        <div class="gold-divider left"></div>
+      </div>
+      <div class="rating-badge" data-animate="fade-left" data-delay="100">
+        <div class="rating-score">{overallRating}</div>
+        <div class="rating-stars" aria-label={`${overallRating} stars`}>
+          {'★'.repeat(5)}
+        </div>
+        <div class="rating-count">{ratingLabel}</div>
+        <div class="google-logo">
+          <!-- Google "G" SVG -->
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <span>Google</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Carousel -->
+    <div class="reviews-carousel-wrapper" data-animate="fade-up" data-delay="150">
+      <div class="reviews-track" id="reviews-track">
+        {reviews.map((review) => (
+          <article class="review-card">
+            <div class="review-card-top">
+              <div class="reviewer-avatar" style={`background: ${review.avatarColor};`}>
+                {review.initials}
+              </div>
+              <div class="reviewer-info">
+                <strong class="reviewer-name">{review.author}</strong>
+                <span class="review-date">{review.date}</span>
+              </div>
+              <div class="review-google-icon" aria-label="Google review">
+                <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+              </div>
+            </div>
+            <div class="review-stars" aria-label={`${review.rating} stars`}>
+              {'★'.repeat(review.rating)}
+            </div>
+            <blockquote class="review-text">
+              <p>"{review.text}"</p>
+            </blockquote>
+          </article>
+        ))}
+      </div>
+
+      <!-- Navigation arrows -->
+      <button class="carousel-btn carousel-btn-prev" id="reviews-prev" aria-label={prevLabel}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="carousel-btn carousel-btn-next" id="reviews-next" aria-label={nextLabel}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Dots -->
+    <div class="carousel-dots" id="reviews-dots" aria-hidden="true"></div>
+
+    <!-- CTA -->
+    <div class="reviews-cta" data-animate="fade-up" data-delay="200">
+      <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" class="google-cta-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        {ctaText}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+.reviews-section {
+  background: var(--color-dark);
+  overflow: hidden;
+}
+
+/* ---- Header ---- */
+.reviews-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.reviews-header-text .section-title {
+  color: var(--color-cream);
+}
+
+.reviews-header-text .section-title em {
+  color: var(--color-gold-light);
+  font-style: italic;
+}
+
+/* ---- Rating Badge ---- */
+.rating-badge {
+  flex-shrink: 0;
+  background: rgba(250, 247, 242, 0.05);
+  border: 1px solid rgba(200, 169, 110, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 160px;
+}
+
+.rating-score {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-cream);
+  letter-spacing: -0.02em;
+}
+
+.rating-stars {
+  color: #FBBC05;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+
+.rating-count {
+  font-size: 0.75rem;
+  color: rgba(250, 247, 242, 0.5);
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-top: 0.1rem;
+}
+
+.google-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(200, 169, 110, 0.15);
+  width: 100%;
+  justify-content: center;
+}
+
+.google-logo span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(250, 247, 242, 0.5);
+  letter-spacing: 0.02em;
+}
+
+/* ---- Carousel ---- */
+.reviews-carousel-wrapper {
+  position: relative;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+
+.reviews-track::-webkit-scrollbar { display: none; }
+
+/* ---- Review Card ---- */
+.review-card {
+  flex: 0 0 calc(33.333% - 1rem);
+  min-width: 300px;
+  background: rgba(250, 247, 242, 0.04);
+  border: 1px solid rgba(200, 169, 110, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+
+.review-card:hover {
+  border-color: rgba(200, 169, 110, 0.45);
+  background: rgba(250, 247, 242, 0.07);
+  transform: translateY(-3px);
+}
+
+.review-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.reviewer-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.reviewer-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.reviewer-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-date {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(250, 247, 242, 0.45);
+  margin-top: 0.15rem;
+}
+
+.review-google-icon {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.review-stars {
+  color: #FBBC05;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.review-text p {
+  font-family: var(--font-serif);
+  font-size: 0.975rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: rgba(250, 247, 242, 0.75);
+}
+
+/* ---- Nav Buttons ---- */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.15);
+  border: 1px solid rgba(200, 169, 110, 0.3);
+  color: var(--color-gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background: rgba(200, 169, 110, 0.3);
+  border-color: var(--color-gold);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-btn-prev { left: -22px; }
+.carousel-btn-next { right: -22px; }
+
+/* ---- Dots ---- */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(200, 169, 110, 0.25);
+  transition: background var(--transition), width var(--transition);
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  background: var(--color-gold);
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* ---- CTA ---- */
+.reviews-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.google-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.875rem 2rem;
+  background: rgba(250, 247, 242, 0.06);
+  border: 1px solid rgba(250, 247, 242, 0.15);
+  border-radius: var(--radius-full);
+  color: rgba(250, 247, 242, 0.8);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+.google-cta-btn:hover {
+  background: rgba(250, 247, 242, 0.1);
+  border-color: rgba(250, 247, 242, 0.3);
+  color: var(--color-cream);
+  transform: translateY(-1px);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .reviews-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .rating-badge {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    min-width: unset;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .rating-score { font-size: 2.5rem; }
+
+  .google-logo {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    border-left: 1px solid rgba(200, 169, 110, 0.15);
+    padding-left: 1.25rem;
+  }
+
+  .review-card { flex: 0 0 min(85vw, 340px); }
+
+  .carousel-btn { display: none; }
+}
+
+@media (max-width: 600px) {
+  .review-card { flex: 0 0 min(90vw, 320px); }
+}
+</style>
+
+<script>
+  const track = document.getElementById('reviews-track') as HTMLElement | null;
+  const dotsContainer = document.getElementById('reviews-dots') as HTMLElement | null;
+  const prevBtn = document.getElementById('reviews-prev') as HTMLButtonElement | null;
+  const nextBtn = document.getElementById('reviews-next') as HTMLButtonElement | null;
+
+  if (track && dotsContainer) {
+    const cards = Array.from(track.querySelectorAll<HTMLElement>('.review-card'));
+    let currentIndex = 0;
+
+    // Build dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = `carousel-dot${i === 0 ? ' active' : ''}`;
+      dot.setAttribute('aria-label', `Review ${i + 1}`);
+      dot.addEventListener('click', () => scrollTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.querySelectorAll<HTMLElement>('.carousel-dot'));
+
+    function scrollTo(index: number) {
+      if (!track) return;
+      currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+      const card = cards[currentIndex];
+      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      updateDots();
+    }
+
+    function updateDots() {
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+    }
+
+    // Scroll spy: update dots & index based on scroll position
+    let scrollTimer: ReturnType<typeof setTimeout>;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        let closestIdx = 0;
+        let closestDist = Infinity;
+        cards.forEach((card, i) => {
+          const dist = Math.abs(card.getBoundingClientRect().left - (track?.getBoundingClientRect().left ?? 0));
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        });
+        currentIndex = closestIdx;
+        updateDots();
+      }, 50);
+    });
+
+    prevBtn?.addEventListener('click', () => scrollTo(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => scrollTo(currentIndex + 1));
+  }
+</script>

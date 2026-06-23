@@ -3,7 +3,7 @@ export const prerender = false;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
-import TestimonialCard from '../components/TestimonialCard.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
 import ContactForm from '../components/ContactForm.astro';
 
 const lang = 'bg';
@@ -46,20 +46,6 @@ const services = [
   },
 ];
 
-const testimonials = [
-  {
-    text: 'Искам да благодаря от името на моята майка Силвия Иванова на Доктор Пенкова и нейния екип за изключителното отношение и професионализъм. Искрено препоръчвам техните услуги.',
-    author: 'Семейство Иванови',
-  },
-  {
-    text: 'Изказвам своята искрена благодарност към Вас д-р Пенкова и Вашият екип! Сърдечно благодаря за красивата усмивка, с която ме направихте щастлива. Пожелавам Ви още много професионални успехи!',
-    author: 'Пациентка',
-  },
-  {
-    text: 'Много благодаря на Д-р Пенкова за вниманието и големите професионални умения! Възстанових един зъб, който мислех, че няма да го имам. Д-р Пенкова постави перфектно имплант — сега този зъб го чувствам като мой!',
-    author: 'Тодорова М.',
-  },
-];
 ---
 
 <BaseLayout title="DreamDent — Имплантология и естетична стоматология в Плевен" lang={lang}>
@@ -135,24 +121,8 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="section testimonials-section section-dark">
-    <div class="container">
-      <header class="section-header text-center" data-animate="fade-up">
-        <span class="section-label">Отзиви</span>
-        <h2 class="section-title">Какво казват нашите <em>пациенти</em></h2>
-        <div class="gold-divider"></div>
-        <p class="section-subtitle" style="color: rgba(250,247,242,0.65);">
-          Над 158 отзива с оценка 4.9 / 5
-        </p>
-      </header>
-      <div class="grid-3" style="margin-top: 3rem;">
-        {testimonials.map((t, i) => (
-          <TestimonialCard {...t} delay={i * 150} />
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- Google Reviews -->
+  <GoogleReviews lang={lang} />
 
   <!-- Dental Tourism Banner -->
   <section class="section tourism-banner">
@@ -314,9 +284,6 @@ const testimonials = [
 }
 
 .about-highlights li svg { color: var(--color-gold); flex-shrink: 0; }
-
-/* Testimonials */
-.testimonials-section { background: var(--color-dark); }
 
 /* Tourism */
 .tourism-banner {
