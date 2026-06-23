@@ -130,6 +130,9 @@ const tr = t(lang);
   const btnArrow = form.querySelector('.cf-arrow') as HTMLElement;
   const submitBtn = form.querySelector('.cf-submit') as HTMLButtonElement;
 
+  // Fix initial state — CSS overrides the `hidden` attribute
+  btnLoading.style.display = 'none';
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     statusEl.className = 'form-status';
