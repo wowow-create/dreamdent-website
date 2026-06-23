@@ -18,7 +18,7 @@ function isActive(path: string) {
   <div class="container header-inner">
     <!-- Logo -->
     <a href={localePath(lang, '/')} class="logo" aria-label="DreamDent — начало">
-      <img src="/logo-transparent.png" alt="DreamDent" class="logo-img" width="220" height="38" loading="eager" />
+      <img src="/logo.png" alt="DreamDent" class="logo-img" loading="eager" />
     </a>
 
     <!-- Desktop Nav -->
@@ -168,11 +168,9 @@ function isActive(path: string) {
 .logo:hover { opacity: 0.88; }
 
 .logo-img {
-  height: 48px;
+  height: 52px;
   width: auto;
   display: block;
-  /* Make white elements visible on any background */
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.45)) drop-shadow(0 1px 4px rgba(0,0,0,0.25));
 }
 
 /* Nav */
