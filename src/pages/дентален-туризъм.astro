@@ -2,6 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import settings from '../content/settings.json';
 const lang = 'bg';
 ---
 
@@ -99,7 +100,7 @@ const lang = 'bg';
             <span>📍</span>
             <div>
               <strong>Плевен, България</strong>
-              <span>бул. „Русе" №17, ет. 1, каб. 2</span>
+              <span>{settings.address}</span>
             </div>
           </div>
         </div>

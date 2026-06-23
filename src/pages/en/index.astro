@@ -5,6 +5,7 @@ import Hero from '../../components/Hero.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import GoogleReviews from '../../components/GoogleReviews.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import settings from '../../content/settings.json';
 
 const lang = 'en';
 const services = [
@@ -161,9 +162,9 @@ const services = [
         <p class="section-subtitle">Contact us for a consultation or inquiry. We will respond within the working day.</p>
         <div class="contact-info-list" style="margin-top: 2rem;">
           {[
-            { icon: '📍', label: 'Address', value: 'Pleven, Blvd "Ruse" 17, floor 1, office 2' },
-            { icon: '📞', label: 'Phone', value: '0887 513 752', href: 'tel:+359887513752' },
-            { icon: '📧', label: 'Email', value: 'info@dreamdent.eu', href: 'mailto:info@dreamdent.eu' },
+            { icon: '📍', label: 'Address', value: settings.addressEn ?? settings.address },
+            { icon: '📞', label: 'Phone', value: settings.phone, href: `tel:${(settings.phone??'').replace(/\s/g,'')}` },
+            { icon: '📧', label: 'Email', value: settings.email, href: `mailto:${settings.email}` },
           ].map((item) => (
             <div class="contact-info-item">
               <div class="contact-info-icon">{item.icon}</div>

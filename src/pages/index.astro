@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import GoogleReviews from '../components/GoogleReviews.astro';
 import ContactForm from '../components/ContactForm.astro';
+import settings from '../content/settings.json';
 
 const lang = 'bg';
 const services = [
@@ -174,29 +175,29 @@ const services = [
             <div class="contact-info-icon">📍</div>
             <div>
               <strong>Адрес</strong>
-              <span>гр. Плевен, бул. „Русе" №17, ет. 1, каб. 2</span>
+              <span>{settings.address}</span>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-info-icon">📞</div>
             <div>
               <strong>Телефон</strong>
-              <a href="tel:+359887513752">0887 513 752</a>
+              <a href={`tel:${(settings.phone??'').replace(/\s/g,'')}`}>{settings.phone}</a>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-info-icon">📧</div>
             <div>
               <strong>Имейл</strong>
-              <a href="mailto:info@dreamdent.eu">info@dreamdent.eu</a>
+              <a href={`mailto:${settings.email}`}>{settings.email}</a>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-info-icon">🕐</div>
             <div>
               <strong>Работно време</strong>
-              <span>Пн, Чт: 12:30 – 18:30</span>
-              <span>Вт, Ср, Пт: 8:30 – 13:30</span>
+              <span>Пн, Чт: {settings.mondayHours ?? '12:30 – 18:30'}</span>
+              <span>Вт, Ср, Пт: {settings.tuesdayHours ?? '8:30 – 13:30'}</span>
             </div>
           </div>
         </div>

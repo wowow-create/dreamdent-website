@@ -2,6 +2,7 @@
 export const prerender = false;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import settings from '../content/settings.json';
 const lang = 'bg';
 ---
 
@@ -27,21 +28,21 @@ const lang = 'bg';
             <div class="info-card-icon">📍</div>
             <div>
               <h4>Адрес</h4>
-              <p>гр. Плевен, бул. „Русе" №17, ет. 1, каб. 2</p>
+              <p>{settings.address}</p>
             </div>
           </div>
           <div class="info-card">
             <div class="info-card-icon">📞</div>
             <div>
               <h4>Телефон</h4>
-              <a href="tel:+359887513752">0887 513 752</a>
+              <a href={`tel:${settings.phone?.replace(/\s/g, '')}`}>{settings.phone}</a>
             </div>
           </div>
           <div class="info-card">
             <div class="info-card-icon">📧</div>
             <div>
               <h4>Имейл</h4>
-              <a href="mailto:info@dreamdent.eu">info@dreamdent.eu</a>
+              <a href={`mailto:${settings.email}`}>{settings.email}</a>
             </div>
           </div>
         </div>
@@ -50,11 +51,11 @@ const lang = 'bg';
         <table class="hours-table">
           <tbody>
             {[
-              { day: 'Понеделник', hours: '12:30 – 18:30' },
-              { day: 'Вторник',   hours: '8:30 – 13:30' },
-              { day: 'Сряда',     hours: '8:30 – 13:30' },
-              { day: 'Четвъртък', hours: '12:30 – 18:30' },
-              { day: 'Петък',     hours: '8:30 – 13:30' },
+              { day: 'Понеделник', hours: settings.mondayHours ?? '12:30 – 18:30' },
+              { day: 'Вторник',   hours: settings.tuesdayHours ?? '8:30 – 13:30' },
+              { day: 'Сряда',     hours: settings.wednesdayHours ?? '8:30 – 13:30' },
+              { day: 'Четвъртък', hours: settings.thursdayHours ?? '12:30 – 18:30' },
+              { day: 'Петък',     hours: settings.fridayHours ?? '8:30 – 13:30' },
               { day: 'Събота',    hours: 'Почивен ден', closed: true },
               { day: 'Неделя',    hours: 'Почивен ден', closed: true },
             ].map((r) => (
@@ -68,7 +69,7 @@ const lang = 'bg';
 
         <!-- Map placeholder -->
         <div class="map-placeholder" data-animate="fade-up" data-delay="200">
-          <p>📍 гр. Плевен, бул. „Русе" №17</p>
+          <p>📍 {settings.address}</p>
           <a
             href="https://maps.google.com/?q=Плевен+бул+Русе+17"
             target="_blank"

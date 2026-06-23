@@ -2,6 +2,7 @@
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import settings from '../../content/settings.json';
 const lang = 'en';
 ---
 <BaseLayout title="Contact — DreamDent Pleven, Bulgaria" description="Contact DreamDent. Address: Pleven, Blvd Ruse 17. Tel: +359 887 513 752. info@dreamdent.eu">
@@ -14,9 +15,9 @@ const lang = 'en';
       <h2>Find Us</h2>
       <div class="info-cards">
         {[
-          { icon:'📍', label:'Address', val:'Pleven, Blvd "Ruse" 17, floor 1, office 2, Bulgaria' },
-          { icon:'📞', label:'Phone', val:'+359 887 513 752', href:'tel:+359887513752' },
-          { icon:'📧', label:'Email', val:'info@dreamdent.eu', href:'mailto:info@dreamdent.eu' },
+          { icon:'📍', label:'Address', val: settings.addressEn ?? settings.address },
+          { icon:'📞', label:'Phone', val: settings.phone, href:`tel:${(settings.phone ?? '').replace(/\s/g,'')}` },
+          { icon:'📧', label:'Email', val: settings.email, href:`mailto:${settings.email}` },
         ].map((i) => (
           <div class="info-card">
             <div class="info-card-icon">{i.icon}</div>
@@ -30,9 +31,9 @@ const lang = 'en';
       <h2 style="margin-top:2.5rem">Working Hours</h2>
       <table class="hours-table"><tbody>
         {[
-          {day:'Monday',h:'12:30 – 18:30'},{day:'Tuesday',h:'8:30 – 13:30'},
-          {day:'Wednesday',h:'8:30 – 13:30'},{day:'Thursday',h:'12:30 – 18:30'},
-          {day:'Friday',h:'8:30 – 13:30'},{day:'Saturday',h:'Closed',c:true},{day:'Sunday',h:'Closed',c:true},
+          {day:'Monday',h:settings.mondayHours??'12:30 – 18:30'},{day:'Tuesday',h:settings.tuesdayHours??'8:30 – 13:30'},
+          {day:'Wednesday',h:settings.wednesdayHours??'8:30 – 13:30'},{day:'Thursday',h:settings.thursdayHours??'12:30 – 18:30'},
+          {day:'Friday',h:settings.fridayHours??'8:30 – 13:30'},{day:'Saturday',h:'Closed',c:true},{day:'Sunday',h:'Closed',c:true},
         ].map((r) => <tr class:list={[{closed:r.c}]}><td>{r.day}</td><td>{r.h}</td></tr>)}
       </tbody></table>
     </div>
