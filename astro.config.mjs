@@ -7,6 +7,9 @@ export default defineConfig({
   output: 'static',
   adapter: cloudflare({
     platformProxy: { enabled: true },
+    imageService: 'passthrough',
+    imagesBindingName: undefined,
+    sessionKVBindingName: undefined,
   }),
   vite: {
     optimizeDeps: {

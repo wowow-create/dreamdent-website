@@ -1,14 +1,16 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-const isProd = process.env.NODE_ENV === 'production';
+const repoOwner = process.env.GITHUB_REPO_OWNER;
+const repoName = process.env.GITHUB_REPO_NAME;
+const isProd = process.env.NODE_ENV === 'production' && !!repoOwner && !!repoName;
 
 export default config({
   storage: isProd
     ? {
         kind: 'github',
         repo: {
-          owner: process.env.GITHUB_REPO_OWNER!,
-          name: process.env.GITHUB_REPO_NAME!,
+          owner: repoOwner as string,
+          name: repoName as string,
         },
       }
     : { kind: 'local' },

@@ -2,10 +2,10 @@ name = "dreamdent-website"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-assets = { directory = "dist/client" }
-
 [vars]
 NODE_ENV = "production"
 CONTACT_EMAIL = "galyapenkovatodorova@gmail.com"
+GITHUB_REPO_OWNER = "wowow-create"
+GITHUB_REPO_NAME = "dreamdent-website"
 
-# RESEND_API_KEY се пази като Secret в Cloudflare Dashboard (не тук!)
+# RESEND_API_KEY и KEYSTATIC_* се пазят като Secrets в Cloudflare Dashboard
