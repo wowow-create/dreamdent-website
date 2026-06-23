@@ -18,11 +18,7 @@ function isActive(path: string) {
   <div class="container header-inner">
     <!-- Logo -->
     <a href={localePath(lang, '/')} class="logo" aria-label="DreamDent — начало">
-      <img src="/favicon.png" alt="" class="logo-icon" width="44" height="44" loading="eager" />
-      <span class="logo-text">
-        <span class="logo-dream">Dream</span><span class="logo-dent">Dent</span>
-        <span class="logo-tagline">{lang === 'bg' ? 'Дентален Център' : 'Dental Center'}</span>
-      </span>
+      <img src="/logo-transparent.png" alt="DreamDent" class="logo-img" width="220" height="38" loading="eager" />
     </a>
 
     <!-- Desktop Nav -->
@@ -163,61 +159,24 @@ function isActive(path: string) {
 /* Logo */
 .logo {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 0.625rem;
   flex-shrink: 0;
   text-decoration: none;
-}
-
-.logo-icon {
-  width: 44px;
-  height: 44px;
+  background: #3a3a3a;
   border-radius: 10px;
-  object-fit: cover;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
+  padding: 5px 12px 5px 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.logo:hover .logo-icon {
-  transform: scale(1.05);
+.logo:hover {
+  background: #2a2a2a;
+  transform: scale(1.02);
 }
 
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.logo-dream {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--color-dark);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.logo-dent {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 300;
-  color: var(--color-gold);
-  letter-spacing: 0.05em;
-  line-height: 1;
-}
-
-.logo-dream, .logo-dent { display: inline; }
-
-.logo-tagline {
-  font-family: var(--font-sans);
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
+.logo-img {
+  height: 38px;
+  width: auto;
   display: block;
-  margin-top: 3px;
 }
 
 /* Nav */
