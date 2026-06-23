@@ -14,11 +14,6 @@ export default config({
           owner: repoOwner as string,
           name: repoName as string,
         },
-        githubApp: {
-          appSlug: process.env.PUBLIC_KEYSTATIC_GITHUB_APP_SLUG as string,
-          clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID as string,
-          clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET as string,
-        },
       }
     : { kind: 'local' },
 
