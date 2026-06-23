@@ -2,7 +2,9 @@ import { config, fields, collection, singleton } from '@keystatic/core';
 
 const repoOwner = process.env.GITHUB_REPO_OWNER;
 const repoName = process.env.GITHUB_REPO_NAME;
-const isProd = process.env.NODE_ENV === 'production' && !!repoOwner && !!repoName;
+// Use import.meta.env.DEV (Vite/Astro built-in) instead of NODE_ENV,
+// because wrangler.toml injects NODE_ENV=production even in local dev via platformProxy.
+const isProd = !import.meta.env.DEV && !!repoOwner && !!repoName;
 
 export default config({
   storage: isProd
@@ -23,7 +25,14 @@ export default config({
     siteSettings: singleton({
       label: 'Настройки на сайта',
       path: 'src/content/settings',
+      format: { data: 'json' },
       schema: {
+        logo: fields.image({
+          label: 'Лого (качи PNG/SVG с прозрачен фон)',
+          description: 'Появява се в хедъра и фуутъра. Препоръчителен размер: 200×60px, PNG с прозрачен фон.',
+          directory: 'public/images/settings',
+          publicPath: '/images/settings/',
+        }),
         phone: fields.text({ label: 'Телефон', defaultValue: '0887 513 752' }),
         email: fields.text({ label: 'Имейл', defaultValue: 'info@dreamdent.eu' }),
         address: fields.text({ label: 'Адрес', defaultValue: 'гр. Плевен, бул. „Русе" №17, ет. 1, каб. 2' }),

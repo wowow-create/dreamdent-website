@@ -2,8 +2,8 @@
 import type { Lang } from '../utils/i18n';
 import { t, localePath, servicesSlugs } from '../utils/i18n';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
+interface Props { lang: Lang; logoSrc?: string; }
+const { lang, logoSrc } = Astro.props;
 const tr = t(lang);
 const services = servicesSlugs[lang];
 const year = new Date().getFullYear();
@@ -33,7 +33,11 @@ const year = new Date().getFullYear();
       <!-- Brand -->
       <div class="footer-brand">
         <a href={localePath(lang, '/')} class="footer-logo-link" aria-label="DreamDent — начало">
-          <img src="/logo-transparent.png" alt="DreamDent" class="footer-logo-img" loading="lazy" />
+          {logoSrc ? (
+            <img src={logoSrc} alt="DreamDent" class="footer-logo-img" loading="lazy" />
+          ) : (
+            <span class="footer-logo-text">Dream<span class="footer-logo-accent">Dent</span></span>
+          )}
         </a>
         <p class="footer-tagline">{tr.footer.tagline}</p>
         <div class="footer-contact-quick">
@@ -168,9 +172,28 @@ const year = new Date().getFullYear();
 .footer-logo-link:hover { opacity: 0.88; }
 
 .footer-logo-img {
-  width: 220px;
+  max-width: 200px;
+  max-height: 60px;
+  width: auto;
   height: auto;
   display: block;
+  object-fit: contain;
+}
+
+.footer-logo-text {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.footer-logo-accent {
+  font-weight: 300;
+  color: var(--color-gold);
 }
 
 .footer-tagline {

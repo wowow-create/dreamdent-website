@@ -15,9 +15,6 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ['@keystatic/core', '@keystatic/astro'],
     },
-    ssr: {
-      external: ['@keystatic/core', '@keystatic/astro'],
-    },
   },
   integrations: [
     react(),

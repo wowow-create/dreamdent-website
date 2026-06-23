@@ -2,8 +2,8 @@
 import type { Lang } from '../utils/i18n';
 import { t, localePath, servicesSlugs } from '../utils/i18n';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
+interface Props { lang: Lang; logoSrc?: string; }
+const { lang, logoSrc } = Astro.props;
 const tr = t(lang);
 const services = servicesSlugs[lang];
 
@@ -18,8 +18,14 @@ function isActive(path: string) {
   <div class="container header-inner">
     <!-- Logo -->
     <a href={localePath(lang, '/')} class="logo" aria-label="DreamDent — начало">
-      <img src="/favicon.png" alt="" class="logo-icon" width="38" height="38" loading="eager" />
-      <span class="logo-name">Dream<span class="logo-accent">Dent</span></span>
+      {logoSrc ? (
+        <img src={logoSrc} alt="DreamDent" class="logo-full" loading="eager" />
+      ) : (
+        <>
+          <img src="/favicon.png" alt="" class="logo-icon" width="38" height="38" loading="eager" />
+          <span class="logo-name">Dream<span class="logo-accent">Dent</span></span>
+        </>
+      )}
     </a>
 
     <!-- Desktop Nav -->
@@ -155,6 +161,14 @@ function isActive(path: string) {
 .logo-icon {
   width: 38px;
   height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-full {
+  max-height: 44px;
+  width: auto;
+  max-width: 200px;
   object-fit: contain;
   flex-shrink: 0;
 }
