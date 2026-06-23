@@ -133,7 +133,6 @@ const tr = t(lang);
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Set loading state
     btnText.hidden = true;
     btnLoading.hidden = false;
     btnArrow.hidden = true;
@@ -141,18 +140,24 @@ const tr = t(lang);
     statusEl.className = 'form-status';
     statusEl.textContent = '';
 
-    const data = Object.fromEntries(new FormData(form));
+    const fd = new FormData(form);
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://formsubmit.co/ajax/galyapenkovatodorova@gmail.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: { 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Ново запитване от DreamDent сайта',
+          name: fd.get('name'),
+          email: fd.get('email'),
+          phone: fd.get('phone') || '—',
+          message: fd.get('message'),
+        }),
       });
 
-      const json = await res.json() as { success?: boolean; error?: string };
+      const json = await res.json() as { success?: string | boolean };
 
-      if (res.ok && json.success) {
+      if (json.success === 'true' || json.success === true) {
         statusEl.className = 'form-status success';
         statusEl.textContent =
           document.documentElement.lang === 'bg'
@@ -160,7 +165,7 @@ const tr = t(lang);
             : 'Your message was sent successfully! We will contact you soon.';
         form.reset();
       } else {
-        throw new Error(json.error ?? 'Unknown error');
+        throw new Error('Submit failed');
       }
     } catch {
       statusEl.className = 'form-status error';
