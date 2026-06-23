@@ -32,8 +32,8 @@ const year = new Date().getFullYear();
     <div class="container footer-grid">
       <!-- Brand -->
       <div class="footer-brand">
-        <a href={localePath(lang, '/')} class="footer-logo">
-          <span>Dream</span><span class="gold">Dent</span>
+        <a href={localePath(lang, '/')} class="footer-logo-link" aria-label="DreamDent — начало">
+          <img src="/logo.png" alt="DreamDent" class="footer-logo-img" width="220" height="60" loading="lazy" />
         </a>
         <p class="footer-tagline">{tr.footer.tagline}</p>
         <div class="footer-contact-quick">
@@ -159,16 +159,22 @@ const year = new Date().getFullYear();
 }
 
 /* Brand */
-.footer-logo {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--color-dark);
+.footer-logo-link {
   display: inline-block;
   margin-bottom: 0.75rem;
 }
 
-.footer-logo .gold { color: var(--color-gold); font-weight: 300; }
+.footer-logo-img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.footer-logo-link:hover .footer-logo-img {
+  opacity: 0.9;
+}
 
 .footer-tagline {
   font-size: 0.8rem;
