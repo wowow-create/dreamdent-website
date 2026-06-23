@@ -140,40 +140,37 @@ const tr = t(lang);
     statusEl.className = 'form-status';
     statusEl.textContent = '';
 
-    const fd = new FormData(form);
+    const isBg = document.documentElement.lang === 'bg';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
     try {
-      const res = await fetch('https://formsubmit.co/ajax/galyapenkovatodorova@gmail.com', {
+      const data = Object.fromEntries(new FormData(form));
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: 'Ново запитване от DreamDent сайта',
-          name: fd.get('name'),
-          email: fd.get('email'),
-          phone: fd.get('phone') || '—',
-          message: fd.get('message'),
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        signal: controller.signal,
       });
 
-      const json = await res.json() as { success?: string | boolean };
+      const json = await res.json() as { success?: boolean; error?: string };
 
-      if (json.success === 'true' || json.success === true) {
+      if (res.ok && json.success) {
         statusEl.className = 'form-status success';
-        statusEl.textContent =
-          document.documentElement.lang === 'bg'
-            ? 'Вашето съобщение беше изпратено успешно! Ще се свържем с Вас скоро.'
-            : 'Your message was sent successfully! We will contact you soon.';
+        statusEl.textContent = isBg
+          ? 'Вашето съобщение беше изпратено успешно! Ще се свържем с Вас скоро.'
+          : 'Your message was sent successfully! We will contact you soon.';
         form.reset();
       } else {
-        throw new Error('Submit failed');
+        throw new Error(json.error ?? 'Unknown error');
       }
     } catch {
       statusEl.className = 'form-status error';
-      statusEl.textContent =
-        document.documentElement.lang === 'bg'
-          ? 'Възникна грешка. Моля опитайте отново или ни се обадете.'
-          : 'An error occurred. Please try again or call us directly.';
+      statusEl.textContent = isBg
+        ? 'Възникна грешка. Моля опитайте отново или ни се обадете.'
+        : 'An error occurred. Please try again or call us directly.';
     } finally {
+      clearTimeout(timeout);
       btnText.hidden = false;
       btnLoading.hidden = true;
       btnArrow.hidden = false;
